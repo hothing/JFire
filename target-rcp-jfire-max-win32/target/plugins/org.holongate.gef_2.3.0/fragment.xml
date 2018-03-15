@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<fragment
+   id="org.holongate.gef"
+   name="Java2D support for GEF Fragment"
+   version="2.3.0"
+   provider-name="Holongate.org"
+   plugin-id="org.eclipse.gef"
+   plugin-version="3.0.0"
+   match="compatible">
+
+   <runtime>
+      <library name="holongate-gef.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+</fragment>

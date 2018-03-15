@@ -1,0 +1,263 @@
+body, td, th, a, p {
+	font-family: arial,sans-serif;
+	font-size: 13px;
+}
+
+/*
+body {
+	font-family: Arial sans-serif;
+	font-size: 9px;
+}
+*/
+.logo {
+	background:url(../images/bannerbg_06.gif);
+	width:800px;
+}
+.main {
+	width: 800px;
+	margin-left: auto; 
+ 	margin-right: auto;
+ 	background: #FFFFFF url(../images/back.png) repeat-y;
+ 	/* color: #5A6370; */
+	border:1px solid #666660;
+	
+}
+.menu { 
+	height: 34px;
+  	width: 800px;
+ 	background: #FFFFFF url(../images/menu.png);
+  	color: #D1D3D7;
+}
+.login {
+	text-decoration: none;
+	font-weight: bold;
+}	
+/*
+.listingProducts {
+	text-decoration: none;
+	font-size:12px;
+	font-weight: bold;
+	color:black;
+}
+*/
+.shoppingcartBox {
+	text-decoration: none;
+	vertical-align:middle;
+	font-size:11px;
+	color:black;
+	border:1px solid #AAAAAA;
+	background-color: #CCCCCC;
+	float:right;
+	height:25px;
+	display: inline;
+	margin-right: 1px;
+	
+}
+.headerBox {
+	text-align:center;
+	border:5px solid #fff;
+	line-height: 20px;
+	background-color: #AAAAAA;
+	color:white;
+	width:200px;
+	height:20px;
+	float:left;
+}
+
+
+/* ##### PRODUCT LISTING ##### */
+
+.productListing .content {
+	width: 100%;
+}
+
+.productListing .content .product {
+	border: 1px solid #AAAAAA; 
+	width: 50%;
+}
+
+.productListing .content .product .name {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.productListing .content .product .image {
+	float:left;
+	padding-right: 10px;
+	min-height: 100px;
+/*	width: 164px;*/
+}
+
+.productListing .content .product .image a img {
+	width: 150px;
+}
+
+
+.productListing .content .product .prices {
+}
+
+.productListing .content .product .prices .price {
+}
+
+.productListing .content .product .prices .price .tariffName {
+}
+
+.productListing .content .product .prices .price .amount {
+  font-weight: bold;
+}
+ 
+
+/* ##### PRODUCT DETAILS ##### */
+
+.productDetails .content {
+	margin: 5px 10px 5px 10px;
+	min-height: 200px;
+}
+
+.productDetails .content .image {
+	float: right;
+}
+
+.productDetails .content .image a img {
+	height: 200px;
+}
+
+.productDetails .content .description .name {
+	font-size: large;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.productDetails .content .description .text {
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+.productDetails .content .prices .price .tariffName {
+}
+
+.productDetails .content .prices .price .amount {
+	font-weight: bold;
+}
+
+.productDetails .content .prices .price .addToShoppingCartLink {
+}
+
+.productDetails .content .xinfo .text {
+	clear: right;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+
+/* ##### SHOPPING CART ##### */
+
+.shoppingCart .content {
+	margin: 5px 10px 5px 10px;
+}
+
+.shoppingCart .content .title {
+	font-size: large;
+	font-weight: bold;
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.shoppingCart .content table {
+	width: 100%;
+	text-align: left;
+}
+
+.shoppingCart .content th {
+	font-weight: normal;
+	border-bottom: 1px solid black;
+	text-align: left;
+}
+
+.shoppingCart .numberOfProducts {
+	margin-bottom: 15px;
+}
+
+.continueShopping, .checkout {
+	text-align: center; 
+	background-color: #AAAAAA;
+}
+
+.continueShopping a, .checkout a {
+	color:white; 
+	font-size: 20px; 
+	text-decoration: none
+}
+
+
+/* LOGIN / REGISSTER */
+
+.loginregister .content {
+	margin: 5px 10px 5px 10px;
+	text-align: center;
+}
+
+.loginregister .smallTitle {
+	font-weight: bold;
+	margin-bottom: 15px;
+	background-color: #EEEEEE;
+}
+
+.loginregister .content .login .title, .loginregister .content .register .title {
+	font-size: large;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.loginregister .content .or {
+	font-size: large;
+	margin-bottom: 15px;
+}
+
+.loginregister .formlabel {
+	width: 150px;
+	text-align: right;
+	vertical-align: top;
+}
+
+.loginregister .forminput input, .loginregister .forminput textarea {
+	width: 250px;
+	border: 1px solid #AAAAAA;
+}
+
+.loginregister .formsubmit {
+	text-align: right;
+}
+
+/* OVERVIEW */
+
+.order {
+	text-align: center; 
+	background-color: #AAAAAA;
+}
+
+.order a {
+	color:white; 
+	font-size: 20px; 
+	text-decoration: none
+}
+
+
+/* ##### SHARED ##### */
+
+img {
+	border: 0px;
+}
+
+.main .errors {
+	border: 5px solid red;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.main .errors .message {
+	font-weight: bold;
+	font-size: large;
+}

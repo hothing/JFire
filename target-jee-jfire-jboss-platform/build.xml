@@ -1,0 +1,52 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+
+		<!--
+		Please keep the target project build scripts *as simple as possible*. 
+		Please do not introduce any logic or conditions as below! All scripts should always do exactly the same in a clear,
+		predictable way without having to know anything about the internals of the build script.
+		Conditions like this should be the part of the tooling around these scripts.
+		Condition below will be removed when new nightly build is running.
+		Marc.
+		-->
+		
+		<!--
+		Because the JBoss is likely already configured and overwriting it would destroy it, we check, if it already exists.
+		If it does already exist, we do not overwrite it.
+		Marco.
+		-->
+		<condition property="isJBossAlreadyExtracted" value="true">
+			<!-- Commented because jboss.jar can not be deleted under window because of file handle from eclipse, check now for run.jar
+			<available file="${target}/server/default/lib/jboss.jar"/>
+			-->
+			<available file="${target}/bin/run.jar"/>
+		</condition>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init" unless="isJBossAlreadyExtracted">
+		<!-- ### jboss ### -->
+		<echo>*************** Extracting JBoss platform ****************</echo>
+
+		<mkdir dir="${target}"/>
+		<untar compression="gzip" src="src/jboss-4.2.3.GA.tar.gz" dest="${target}">
+			<mapper type="glob" from="jboss-4.2.3.GA/*" to="*"/>
+		</untar>
+		<!-- chmod +x *.sh scripts -->
+		<path id="scriptspath">
+			<fileset dir="${target}/bin" includes="*.sh"/>
+		</path>
+		<pathconvert property="scripts" refid="scriptspath" pathsep=" "/>
+		<exec executable="chmod" failifexecutionfails="false" failonerror="false">
+			<arg value="+x"/>
+			<arg line="${scripts}"/>
+		</exec>
+	</target>
+</project>

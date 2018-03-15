@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <extension point="org.eclipse.ui.perspectives">
+        <perspective
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.GeographyTemplateDataAdminPerspective"
+            icon="icons/root.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.GeographyTemplateDataAdminPerspective" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.GeographyTemplateDataAdminPerspective.name"/>
+    </extension>
+    <extension point="org.eclipse.ui.views">
+        <category
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.name"/>
+        <view
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.management"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView"
+            icon="icons/root.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView.name"/>
+        <view
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.management"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.editor.name.GeographyTemplateDataNameEditorView"
+            icon="icons/globe.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.editor.name.GeographyTemplateDataNameEditorView" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.editor.name.GeographyTemplateDataNameEditorView.name"/>
+        <view
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.management"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataInformationView"
+            icon="icons/info.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataInformationView" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataInformationView.name"/>
+    </extension>
+    <!--
+    <extension point="org.eclipse.ui.newWizards">
+        <category
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.wizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.zipcode.ZipCodeNewWizard"
+            icon="icons/zipcode.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.zipcode.ZipCodeNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.zipcode.ZipCodeNewWizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.district.DistrictNewWizard"
+            icon="icons/district.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.district.DistrictNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.district.DistrictNewWizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard"
+            icon="icons/location.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard"
+            icon="icons/city.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard"
+            icon="icons/region.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard.name"/>
+        <wizard
+            category="org.nightlabs.jfire.geography.admin.ui.templatedata.wizard"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard"
+            icon="icons/country.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard.name"/>
+    </extension>
+    -->
+    <extension point="org.eclipse.ui.viewActions">
+        <viewContribution
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.geoTreeActions" targetID="org.nightlabs.jfire.geography.admin.ui.templatedata.view.GeographyTemplateDataTreeView">
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView"
+                icon="icons/addLocation.png"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView"
+                icon="icons/addLocation.png"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView"
+                icon="icons/addCity.png"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.GeographyTemplateDataTreeView"
+                icon="icons/addLocation.png"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard.label"
+                style="push" toolbarPath="additions"/>
+        </viewContribution>
+    </extension>
+    <extension point="org.eclipse.ui.actionSets">
+        <actionSet id="org.nightlabs.jfire.geography.admin.ui.actionSet"
+            label="%org.nightlabs.jfire.geography.admin.ui.actionSet.label" visible="false">
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.action.ExportCSVAction"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.action.ExportCSVAction"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.action.ExportCSVAction.label" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.geography.admin.ui.templatedata.action.ImportCSVAction"
+                id="org.nightlabs.jfire.geography.admin.ui.templatedata.action.ImportCSVAction"
+                label="%org.nightlabs.jfire.geography.admin.ui.templatedata.action.ImportCSVAction.label" toolbarPath="additions"/>
+        </actionSet>
+    </extension>
+    <extension point="org.eclipse.ui.perspectiveExtensions">
+        <perspectiveExtension targetID="org.nightlabs.jfire.geography.admin.ui.templatedata.GeographyTemplateDataAdminPerspective">
+            <actionSet id="org.nightlabs.jfire.geography.admin.ui.actionSet"/>
+        </perspectiveExtension>
+    </extension>
+    <extension point="org.eclipse.ui.newWizards">
+        <category id="org.nightlabs.jfire.geography" name="%org.nightlabs.jfire.geography.admin.ui.newWizard.category.name"/>
+        <wizard category="org.nightlabs.jfire.geography"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard"
+            icon="icons/globe.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.country.CountryNewWizard.name"/>
+        <wizard category="org.nightlabs.jfire.geography"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard"
+            icon="icons/globe2.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.region.RegionNewWizard.name"/>
+        <wizard category="org.nightlabs.jfire.geography"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard"
+            icon="icons/city.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.city.CityNewWizard.name"/>
+        <wizard category="org.nightlabs.jfire.geography"
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard"
+            icon="icons/location.png"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.management.location.LocationNewWizard.name"/>
+    </extension>
+    <!--
+
+Editor class does not exist anymore
+
+    <extension point="org.eclipse.ui.editors">
+        <editor
+            class="org.nightlabs.jfire.geography.admin.ui.templatedata.editor.GeographyTemplateDataEditor"
+            icon="icons/root.gif"
+            id="org.nightlabs.jfire.geography.admin.ui.templatedata.editor.GeographyTemplateDataEditor" name="%org.nightlabs.jfire.geography.admin.ui.templatedata.editor.GeographyTemplateDataEditor.name"/>
+    </extension>
+-->
+</plugin>

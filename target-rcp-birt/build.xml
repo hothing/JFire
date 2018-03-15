@@ -1,0 +1,25 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- ### plugins ### -->
+		<mkdir dir="${target}/plugins"/>
+		<copy todir="${target}/plugins">
+			<fileset dir="src/plugins" includes="**/*"/>
+		</copy>
+		
+		<!-- ### plugin zips ### -->
+		<unzip dest="${target}/plugins">
+			<fileset dir="src/plugin-zips" includes="*.zip"/>
+		</unzip>
+	</target>
+</project>

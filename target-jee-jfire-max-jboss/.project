@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-max-jboss</name>
+	<comment></comment>
+	<projects>
+		<project>target-jee-jfire-editor2d-jboss</project>
+		<project>target-jee-jfire-jboss-birt</project>
+		<project>target-jee-jfire-jboss-jbpm</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

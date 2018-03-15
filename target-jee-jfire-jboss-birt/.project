@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-jboss-birt</name>
+	<comment></comment>
+	<projects>
+		<project>target-jee-jfire-jboss-platform</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

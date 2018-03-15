@@ -1,0 +1,237 @@
+
+<div id="progresswrapper">
+	<div id="installationprogress" style="overflow: scroll; height: 300px; border: 1px solid gray;">
+	</div>
+	<div id="progressbar" style="position: relative; height: 22px; color: white; font-weight: bold; margin-top: 6px;"> <!-- padding-left: 5px; border: 1px solid gray;  -->
+	</div>
+</div>
+
+<script type="text/javascript">
+<!--
+var allDone = false;
+var xmlhttp;
+function loadXMLDoc(url)
+{
+	xmlhttp=null;
+	if (window.XMLHttpRequest)
+	  {// code for Firefox, Opera, IE7, etc.
+		  xmlhttp=new XMLHttpRequest();
+	  }
+	else if (window.ActiveXObject)
+	  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	if (xmlhttp!=null)
+	  {
+		try {
+		  xmlhttp.onreadystatechange=state_Change;
+		  //alert("get "+url);
+		  xmlhttp.open("GET",url,true);
+		  //alert("get "+url+" done");
+		  xmlhttp.send(null);
+		} catch(e) {
+			alert(e);
+		}
+	  }
+	else
+	  {
+	  	alert("Your browser does not support XMLHTTP.");
+	  }
+}
+
+function getElementContent(doc, name)
+{
+	try {
+		x = doc.getElementsByTagName(name);
+		if(x != null && x.length == 1) {
+			y = x[0].firstChild;
+			if(y != null) {
+				z = x[0].firstChild.nodeValue;
+				return z;
+			}
+		}
+	} catch(e) {
+		alert(e);
+	}
+	return "";
+}
+
+function state_Change()
+{
+	if (xmlhttp.readyState==4)
+	  {// 4 = "loaded"
+	  if (xmlhttp.status==200)
+	    {// 200 = "OK"
+
+			//alert("1");
+
+	    	doc = xmlhttp.responseXML.documentElement;
+
+			try {
+			    // get messages
+			    newMessages = "";
+			    messages = doc.getElementsByTagName("message");
+			    for (i=0;i<messages.length;i++) {
+				    content = messages[i].firstChild;
+				    if(content != null)
+				    	newMessages = newMessages + content.nodeValue + "<br/>";
+			    }
+				//alert("2");
+			    if(newMessages != "") {
+				    element = document.getElementById('installationprogress');
+				    if(element != null) {
+					    oldContent = element.innerHTML;
+				        element.innerHTML = oldContent + newMessages;
+				        element.scrollTop = element.scrollHeight;
+				    }
+			    }
+	
+				//alert("3");
+				// get progress
+			    workDone = getElementContent(doc, "workDone");
+				
+				//alert("4");
+			    workTotal = getElementContent(doc, "workTotal");
+
+				//alert("x");
+				done = getElementContent(doc, "done");
+				
+				// update progress bar
+				if(workDone > 0 && workTotal > 0) {
+					progress = Math.round(100 / (workTotal / workDone));
+					setPercentage('progressbar', progress);
+				} else {
+					// TODO show infinite
+				}
+	
+				if("true" == done) {
+					allDone = true;
+				}
+			 
+			} catch(e) {
+				alert(e);
+			}
+			
+			//alert("6");
+		  	if(!allDone)
+        		setTimeout("loadXMLDoc('progress.xml');", 500);
+			//alert("7");
+			
+	    }
+	  else
+	    {
+		    //alert("Error");
+		    //if(!allDone)
+	        //	setTimeout("loadXMLDoc('progress.xml');", 250);
+	    	alert("Problem retrieving data:" + xmlhttp.statusText);
+	    }
+	  }
+}
+
+var back = "progress2_back.png";
+var left = "progress2_left.png";
+var initial = true;
+var currentPos = 0;
+var targetPos = 0;
+var approachRunning = false;
+var percentage = 0;
+var progressBG = new Image();
+progressBG.src = back;
+function setPercentage(id, newPercentage)
+{
+	if(newPercentage > 100)
+		newPercentage = 100;
+	if(newPercentage < 0)
+		newPercentage = 0;
+
+	percentage = newPercentage;
+	
+	if(!progressBG.complete) {
+		setTimeout("setPercentage('"+id+"', '"+percentage+"')", 100);
+		return;
+	}
+	bar = document.getElementById(id);
+	if(bar == null) {
+		setTimeout("setPercentage('"+id+"', '"+percentage+"')", 100);
+		return;
+	}
+	
+	zeroPos = Math.floor(progressBG.width / 2);
+	if(bar.offsetWidth > zeroPos) {
+		bar.style.width = zeroPos;
+	}
+	if(bar.offsetHeigh < progressBG.height) {
+		bar.style.height = progressBG.height;
+	}
+	if(initial) {
+		currentPos = -zeroPos;
+		bar.style.backgroundPosition = currentPos+"px 50%";
+		bar.style.backgroundImage = "url("+progressBG.src+")";
+		bar.style.backgroundRepeat = "no-repeat";
+		bar.style.position = "relative";
+		initial = false;
+	}
+
+	if(left != null && left != "") {
+		bar.innerHTML = "<img src='progress2_left.png'/><span style='position: absolute; top: 2px;'>"+percentage+"%</span>";
+	} else {
+		bar.innerHTML = "<span style='position: absolute; top: 4px;'>"+percentage+"%</span>";
+	}
+	
+	onePercentOffset = bar.offsetWidth / 100;
+	offset = Math.round(onePercentOffset * percentage);
+	
+	targetPos = -zeroPos + offset;
+	
+	//alert("bar width: "+bar.offsetWidth+"\nzero pos: "+zeroPos+"\none percent: "+onePercentOffset+"\ntargetPos: "+targetPos+"\noffset: "+offset);
+	if(!approachRunning)
+		approach(id);
+}
+
+function approach(id)
+{
+	if(currentPos != targetPos) {
+		approachRunning = true;
+		diff = Math.abs(currentPos - targetPos);
+		x = Math.max(1, Math.round(diff / 5));
+		if(currentPos < targetPos)
+			currentPos += x;
+		else
+			currentPos -= x;
+		bar = document.getElementById(id);
+		bar.style.backgroundPosition = currentPos+"px 50%";
+		setTimeout("approach('"+id+"')", 50);
+	} else {
+		approachRunning = false;
+	}
+}
+
+
+function resize()
+{ 
+	var frame = document.getElementById("installationprogress");
+	if(frame == null) {
+		setTimeout("resize()", 100);
+		return;
+	}
+	var htmlheight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
+	var viewportheight = self.innerHeight || (document.documentElement.clientHeight || document.body.clientHeight);
+	//if ( htmlheight < viewportheight ) {
+		newHeight = frame.offsetHeight + (viewportheight - htmlheight);
+		//newHeight -= Math.round(newHeight / 10);
+		newHeight = Math.max(newHeight, 300); 
+		frame.style.height = newHeight + "px"; 
+	//} 
+
+	// re-draw progress
+	setPercentage('progressbar', percentage);
+} 
+
+resize();
+window.onresize = resize;
+
+loadXMLDoc('progress.xml');
+
+-->
+</script> 
+

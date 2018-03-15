@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Generated-from: 1151959615000;type=2
+Bundle-ManifestVersion: 2
+Bundle-Name: JFireGeography Plug-in
+Bundle-SymbolicName: org.nightlabs.jfire.geography.ui;singleton:=true
+Bundle-Version: 0.9.8.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.nightlabs.jfire.geography.ui.GeographyPlugin
+Bundle-Vendor: NightLabs.com
+Bundle-Localization: plugin
+Export-Package: org.nightlabs.jfire.geography.ui
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.nightlabs.jfire.base.ui;visibility:=reexport,
+ org.nightlabs.jfire.base.j2ee;visibility:=reexport
+Eclipse-LazyStart: true
+Eclipse-RegisterBuddy: org.nightlabs.jfire.base.j2ee

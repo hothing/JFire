@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="project" default="compile.post">
+	<target name="compile.post">
+		<property file="build-nightlabs-path.properties"/>
+		<property file="build-nightlabs.properties"/>
+
+	    <path id="javac.classpath">
+	    	<pathelement path="${project.path}" />
+	    	<pathelement path="${java.class.path}" />
+			<fileset dir="." includes="${project.path.includes}" />
+	    	<pathelement path="${project.dir}/bin-boot" />
+	    </path>
+
+
+	    <mkdir dir="${project.dir}/bin-boot"/>
+	    <javac debug="${javac.debug}" encoding="UTF-8" source="${javac.source}" target="${javac.target}" destdir="${project.dir}/bin-boot" classpathref="javac.classpath">
+	      <src path="${project.dir}/src-boot"/>
+	    </javac>
+	    <copy todir="${project.dir}/bin-boot">
+	      <fileset dir="${project.dir}/src-boot" excludes="**/*.java"/>
+	    </copy>
+
+
+<!-- This "wraploader" seems not to be necessary. Don't know what it's used for...
+	    <mkdir dir="${project.dir}/bin-wrap"/>
+	    <javac debug="${javac.debug}" encoding="UTF-8" source="${javac.source}" target="${javac.target}" destdir="${project.dir}/bin-wrap" classpathref="javac.classpath">
+	      <src path="${project.dir}/src-wrap"/>
+	    </javac>
+	    <copy todir="${project.dir}/bin-wrap">
+	      <fileset dir="${project.dir}/src-wrap" excludes="**/*.java"/>
+	    </copy>
+-->
+
+	</target>
+</project>

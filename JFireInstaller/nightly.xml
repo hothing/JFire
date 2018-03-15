@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nightlybuild PUBLIC "-//NightLabs//DTD NightlyBuild V 0.14//EN" "http://www.nightlabs.de/dtd/nightlybuild_0_14.dtd">
+<nightlybuild>
+  <project name="JFireInstaller" exclude-from-ide-setup="true" build-order="after">
+    <ant path="JFireInstaller" file="build-nightlabs.xml" target="deploy" />
+    <provides />
+    <provides path="WORKSPACE/JFireInstaller/dist/jfire-jboss-installer.jar" location="JFireInstaller/dist/jfire-jboss-installer.jar"/>
+    <provides path="/JFireInstaller/dist/jfire-jboss-installer.jar" location="JFireInstaller/dist/jfire-jboss-installer.jar"/>
+    <requires />
+    <publishes location="JFireInstaller/dist/JFireInstaller.jar" />
+    <javadoc path="JFireInstaller/src" />
+  </project>
+</nightlybuild>

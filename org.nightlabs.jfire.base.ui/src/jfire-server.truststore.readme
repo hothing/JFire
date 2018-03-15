@@ -1,0 +1,8 @@
+The jfire-server.truststore contains the public certificate for localhost (for local development
+purposes) as well as all publicly available certificate authorities that were available by Ubuntu
+Hardy Heron under /etc/ssl/certs/ on the 13.10.2008.
+
+They were imported with the following shell command:
+ for file in `ls -L /etc/ssl/certs/*.pem`; do keytool -v -importcert -noprompt -keystore jfire-server.truststore -storepass nightlabs -file $file -alias `basename $file .pem`; done  
+
+The keystore 'jfire-server.truststore' has password 'nightlabs' like the server side keystore does.

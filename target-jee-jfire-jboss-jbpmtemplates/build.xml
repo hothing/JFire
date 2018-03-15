@@ -1,0 +1,22 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- ### jboss/server/default ### -->
+		<mkdir dir="${target}/server/default"/>
+		<copy overwrite="true" todir="${target}/server/default">
+			<fileset dir="src/jboss-server">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	</target>
+</project>

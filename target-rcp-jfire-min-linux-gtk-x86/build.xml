@@ -1,0 +1,23 @@
+<!-- call ant for all projects referenced by this project (from file .project) -->
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+		<xmlproperty file=".project"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build.subprojects" if="projectDescription.projects.project">
+		<subant>
+			<filelist dir=".." files="${projectDescription.projects.project}"/>
+			<property name="target" value="${target}"/>
+		</subant>
+	</target>
+	
+	<target name="build" depends="init, build.subprojects"/>
+</project>

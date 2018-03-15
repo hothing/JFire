@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-min-jboss</name>
+	<comment></comment>
+	<projects>
+		<project>target-jee-jfire-jboss-conf</project>
+		<project>target-jee-jfire-jboss-jfirelog4j</project>
+		<project>target-jee-jfire-jboss-libs</project>
+		<project>target-jee-jfire-jboss-platform</project>
+		<project>target-jee-jfire-jboss-sar</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

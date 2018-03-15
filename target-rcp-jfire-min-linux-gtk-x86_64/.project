@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-rcp-jfire-min-linux-gtk-x86_64</name>
+	<comment></comment>
+	<projects>
+		<project>target-rcp-jfire-min-various</project>
+		<project>target-rcp-jfire-platform-linux-gtk-x86_64</project>
+		<project>target-rcp-jfire-platform-nl</project>
+		<project>target-rcp-jfire-min-rcl</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

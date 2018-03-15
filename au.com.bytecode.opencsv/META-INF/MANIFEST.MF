@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Opencsv Plug-in
+Bundle-SymbolicName: au.com.bytecode.opencsv
+Bundle-Version: 1.8
+Bundle-Vendor: nightlabs.org
+Export-Package: au.com.bytecode.opencsv,
+ au.com.bytecode.opencsv.bean

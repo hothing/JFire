@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dialog Plug-in
+Bundle-SymbolicName: org.nightlabs.eclipse.ui.dialog;singleton:=true
+Bundle-Version: 1.1.8.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.jface,
+ org.eclipse.ui,
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.forms,
+ org.apache.log4j
+Bundle-Activator: org.nightlabs.eclipse.ui.dialog.DialogPlugin
+Eclipse-LazyStart: true
+Bundle-Vendor: NightLabs.org
+Export-Package: org.nightlabs.eclipse.ui.dialog
+

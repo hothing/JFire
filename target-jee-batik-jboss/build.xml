@@ -1,0 +1,19 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<mkdir dir="${target}/server/default/lib"/>
+		<copy todir="${target}/server/default/lib">
+			<fileset dir="../target-batik/src/plugins" includes="**/*.jar"/>
+		</copy>
+	</target>
+</project>

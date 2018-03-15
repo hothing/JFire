@@ -1,0 +1,7 @@
+/.metadata
+.settings
+*.class
+*.dll
+*.ignore
+*.jar
+*.zip

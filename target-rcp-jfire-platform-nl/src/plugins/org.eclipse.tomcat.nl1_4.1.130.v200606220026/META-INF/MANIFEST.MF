@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-Name: %nlFragmentName
+Bundle-SymbolicName: org.eclipse.tomcat.nl1 ;singleton=true
+Bundle-Version: 4.1.130.v200606220026
+Bundle-ClassPath: nl1.jar
+Bundle-Vendor: %nlProviderName
+Fragment-Host: org.eclipse.tomcat;bundle-version="[4.1.130,4.2.0)"
+Bundle-Localization: nl_fragment

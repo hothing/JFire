@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-jboss-installer</name>
+	<comment></comment>
+	<projects>
+		<project>JFireInstaller</project>
+		<project>NightLabsInstaller</project>
+		<project>NightLabsInstallerExtensions</project>
+		<project>target-jee-jfire-max-jboss</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

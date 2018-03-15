@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-rcp-jfire-max-win32</name>
+	<comment></comment>
+	<projects>
+		<project>target-rcp-batik</project>
+		<project>target-rcp-birt</project>
+		<project>target-rcp-jfire-editor2d-win32</project>
+		<project>target-rcp-jfire-max-various</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

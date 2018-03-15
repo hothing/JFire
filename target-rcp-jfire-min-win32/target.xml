@@ -1,0 +1,6 @@
+<target>
+	<category id="rcp-jfire"/>
+	<os>win32</os>
+	<ws>win32</ws>
+	<arch></arch>
+</target>

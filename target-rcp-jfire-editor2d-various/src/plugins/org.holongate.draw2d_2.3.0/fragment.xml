@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<fragment
+   id="org.holongate.draw2d"
+   name="Java2D support for Draw2d Fragment"
+   version="2.3.0"
+   provider-name="Holongate.org"
+   plugin-id="org.eclipse.draw2d"
+   plugin-version="3.0.0"
+   match="compatible">
+
+   <runtime>
+      <library name="holongate-draw2d.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.holongate.j2d" version="2.3.0" match="equivalent"/>
+   </requires>
+
+
+</fragment>

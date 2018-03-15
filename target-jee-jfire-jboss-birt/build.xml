@@ -1,0 +1,35 @@
+<project default="build">
+
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+
+	<target name="build" depends="init">
+		<mkdir dir="${target}/server/default/data/jfire"/>
+		<untar compression="gzip" src="${basedir}/src/birt-deployment/birt-runtime.tar.gz" dest="${target}/server/default/data/jfire"/>
+		<mkdir dir="${target}/server/default/data/jfire/birt/plugins/org.nightlabs.jfire.reporting.oda.server"/>
+		<copy todir="${target}/server/default/data/jfire/birt/plugins/org.nightlabs.jfire.reporting.oda.server">
+			<fileset dir="${basedir}/src/birt-deployment/org.nightlabs.jfire.reporting.oda.server" includes="**/*"/>
+		</copy>
+		
+		<!-- copy the oda.jar to a JBoss lib directory to make it available for all projects with jee runtime container -->
+		<mkdir dir="${target}/server/default/lib"/>
+		<copy todir="${target}/server/default/lib" file="${basedir}/src/birt-deployment/oda.jar"/>
+		<!-- additionally, copy it to the place where it was before (don't know if this is needed in this case -->
+		<mkdir dir="${target}/server/default/data/jfire/birt/lib"/>
+		<copy todir="${target}/server/default/data/jfire/birt/lib" file="${basedir}/src/birt-deployment/oda.jar"/>
+		
+		<!-- copy the xls emmitter libs into the birt runtime -->
+		<mkdir dir="${target}/server/default/data/jfire/birt/plugins/org.uguess.birt.report.engine.emitter.xls_2.3.1.200812291511"/>
+		<copy todir="${target}/server/default/data/jfire/birt/plugins/org.uguess.birt.report.engine.emitter.xls_2.3.1.200812291511">
+			<fileset dir="${basedir}/src/birt-deployment/org.uguess.birt.report.engine.emitter.xls_2.3.1.200812291511" includes="**/*"/>
+		</copy>
+		<copy todir="${target}/server/default/data/jfire/birt/plugins" file="${basedir}/src/birt-deployment/org.uguess.birt.report.engine.common_1.0.3.200812291510.jar"/>
+	</target>
+</project>

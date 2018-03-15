@@ -1,0 +1,174 @@
+body {
+  padding: 20px 20px 20px 20px;
+/*  margin: 0px 20px 0px 0px; */
+  font-family:sans-serif; 
+}
+
+/*
+
+a { color:#0000bb; }
+a:link { color:#0000bb; }
+a:visited { color:#000066; }
+a:active { color:#0000bb; }
+a:hover { color:#0000ff; }
+
+
+#title {
+  font-size: 25pt;
+  font-weight: bold;
+  color: rgb(127, 127, 127);
+}
+
+#pagebody {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+p {
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 10px 0px;
+}
+
+*/
+
+h1, h2 {
+  text-align: left;
+  font-size: 15pt;
+  border-bottom: 1px solid rgb(127, 127, 127);
+  margin-top: 10px;
+}
+
+h2, h3, h4 {
+  text-align: left;
+  font-size: 15pt;
+  border-bottom: 1px solid rgb(127, 127, 127);
+  margin-top: 40px;
+}
+
+h5 {
+  text-align: left;
+  margin: 0px 0px 8px 0px;
+  font-size: 10pt;
+  border-bottom: 1px solid rgb(127, 127, 127);
+}
+
+/*
+
+.blockcontent {
+  font-size: 9pt;
+}
+
+th {
+  text-align: left;
+  font-size: 15pt;
+  border-bottom: 1px solid rgb(127, 127, 127);
+  margin-top: 40px;
+}
+
+.tborderpadding {
+  border-collapse: collapse;
+  border: 1px solid rgb(127, 127, 127);
+}
+.tborderpadding td {
+  border: 1px solid rgb(127, 127, 127);
+  padding: 5px;
+}
+.tborderpadding th {
+  border: 1px solid rgb(127, 127, 127);
+  padding: 5px;
+}
+
+.tborder {
+  border-collapse: collapse;
+  border: 1px solid rgb(127, 127, 127);
+}
+.tborder td {
+  border: 1px solid rgb(127, 127, 127);
+}
+.tborder th {
+  border: 1px solid rgb(127, 127, 127);
+}
+
+.head {
+  background-color: rgb(210,210,210);
+  font-weight: bold;
+  background-image: url(bg-head.png);  
+  background-repeat: repeat-x;
+}
+
+td.head {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.head td {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+th.head {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.head th {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.odd {
+  background-image: url(bg-odd.png);
+  background-color: rgb(242,242,242);
+}
+
+.even {
+  background-color: rgb(247,247,247);
+}
+
+.foot {
+  background-color: rgb(210,210,210);
+  text-align: right;
+}
+
+.legend {
+  border: 1px solid rgb(127,127,127);
+  background-color: rgb(242,242,242);
+  padding: 5px;
+}
+
+.options {
+  border: 1px solid rgb(127,127,127);
+  background-color: rgb(242,242,242);
+  padding: 5px;
+}
+
+.comTitle {
+  font-weight: bold;
+}
+.comText {
+}
+.comMeta {
+  font-size: 10pt;
+  color: rgb(127, 127, 127);
+}
+
+.itemText {
+  text-align: justify;
+}
+
+.articleMeta {
+  margin-top: 10px;
+  border-top: 1px dotted rgb(127, 127, 127);
+}
+
+.nav {
+  background-color: white;
+  border: 1px dotted rgb(127, 127, 127);
+}
+
+*/
+
+/*
+.head {
+  text-align: left;
+  font-size: 15pt;
+  border-bottom: 1px solid rgb(127, 127, 127);
+}
+*/

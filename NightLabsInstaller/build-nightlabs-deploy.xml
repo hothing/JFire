@@ -1,0 +1,5 @@
+<project default="deploy">
+  <target name="deploy">
+    <echo>Target 'deploy' is not supported by this project. Use target 'dist' instead.</echo>
+  </target>
+</project>

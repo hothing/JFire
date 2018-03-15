@@ -1,0 +1,56 @@
+<project default="build">
+
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+
+	<target name="build" depends="init">
+		
+		<path id="compile.path">
+			<fileset dir="lib"><include name="*.jar"/></fileset>
+		</path>
+		
+		<!-- ### JFireServerDataDirectoryJBoss ### -->
+		<mkdir dir="../JFireServerDataDirectoryJBoss/bin"/>
+		<copy todir="../JFireServerDataDirectoryJBoss/bin">
+			<fileset dir="../JFireServerDataDirectoryJBoss/src" excludes="**/*.java"/>
+		</copy>
+		<javac
+			classpathref="compile.path"
+			srcdir="../JFireServerDataDirectoryJBoss/src"
+			destdir="../JFireServerDataDirectoryJBoss/bin"
+			debug="true"
+		/>
+		<mkdir dir="${target}/server/default/deploy"/>
+		<!-- TODO: remove the following line (Marc) -->
+		<delete failonerror="false" file="${target}/server/default/deploy/JFireServerDataDirectoryJBoss.sar"/>
+		<zip destfile="${target}/server/default/deploy/JFireServerDataDirectoryJBoss.sar">
+			<fileset dir="../JFireServerDataDirectoryJBoss/bin" includes="**/*"/>
+		</zip>
+
+		<!-- ### UnifiedEjbJndiJBoss ### -->
+		<mkdir dir="../UnifiedEjbJndiJBoss/bin"/>
+		<copy todir="../UnifiedEjbJndiJBoss/bin">
+			<fileset dir="../UnifiedEjbJndiJBoss/src" excludes="**/*.java"/>
+		</copy>
+		<javac
+			classpathref="compile.path"
+			srcdir="../UnifiedEjbJndiJBoss/src"
+			destdir="../UnifiedEjbJndiJBoss/bin"
+			debug="true"
+		/>
+		<mkdir dir="${target}/server/default/deploy/"/>
+		<!-- TODO: remove the following line (Marc) -->
+		<delete failonerror="false" file="${target}/server/default/deploy/UnifiedEjbJndiJBoss.sar"/>
+		<zip destfile="${target}/server/default/deploy/UnifiedEjbJndiJBoss.sar">
+			<fileset dir="../UnifiedEjbJndiJBoss/bin" includes="**/*"/>
+		</zip>
+	</target>
+
+</project>

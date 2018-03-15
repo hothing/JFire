@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JFire Mantis Plug-in
+Bundle-SymbolicName: org.nightlabs.jfire.errorreport.mantis;singleton:=true
+Bundle-Version: 1.0.1.qualifier
+Bundle-Vendor: NightLabs.org
+Require-Bundle: org.nightlabs.base.ui.errorreport.mantis
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

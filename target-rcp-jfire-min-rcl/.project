@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-rcp-jfire-min-rcl</name>
+	<comment></comment>
+	<projects>
+		<project>DelegatingClassLoader</project>
+		<project>org.nightlabs.jfire.base.j2ee.osgi</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

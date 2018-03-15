@@ -1,0 +1,45 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- ### eclipse ### -->
+		<mkdir dir="${target}"/>
+		<untar compression="gzip" src="src/eclipse-platform-3.3-linux-gtk.tar.gz" dest="${target}">
+			<mapper type="glob" from="eclipse/*" to="*"/>
+			<patternset>
+				<exclude name="eclipse/eclipse.ini"/>
+				<exclude name="eclipse/.eclipseproduct"/>
+				<exclude name="eclipse/eclipse"/>
+				<exclude name="eclipse/eclipse.exe"/>
+				<exclude name="eclipse/eclipsec.exe"/>
+				<exclude name="**/config.ini"/>
+				<exclude name="**/org.apache.ant*/"/>
+				<exclude name="**/org.eclipse.platform*/"/>
+				<exclude name="**/org.eclipse.platform*"/>
+				<exclude name="**/org.eclipse.team*"/>
+				<exclude name="**/org.eclipse.debug*"/>
+				<exclude name="**/org.eclipse.ltk*"/>
+				<exclude name="**/org.eclipse.search*"/>
+				<exclude name="**/org.eclipse.platform.doc*"/>
+				<exclude name="**/org.eclipse.ui.externaltools*"/>
+<!-- removed org.eclipse.ui.workbench and org.eclipse.osgi because those plugins are replaced with patches -->						
+				<exclude name="**/org.eclipse.ui.workbench_3*"/>
+				<exclude name="**/org.eclipse.osgi_3*"/>							
+			</patternset>
+		</untar>
+
+		<!-- ### jfire custom files ### -->
+		<copy todir="${target}">
+			<fileset dir="src/jfire" includes="**/*"/>
+		</copy>
+	</target>
+</project>

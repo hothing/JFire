@@ -1,0 +1,34 @@
+<project default="build">
+	
+	<target name="init">
+		<available file="META-INF/MANIFEST.MF.orig" property="isManifestModified"/>
+	</target>
+	
+	<target name="revertManifest" depends="init" if="isManifestModified">
+		<delete failonerror="false" file="META-INF/MANIFEST.MF"/>
+		<move file="META-INF/MANIFEST.MF.orig" tofile="META-INF/MANIFEST.MF" />
+		<delete failonerror="false" file="META-INF/publishedRemotePackages.csv" />
+	</target>
+	
+	<target name="clean" depends="revertManifest">
+		<!--
+		<delete failonerror="false" file="lib/JFireRCLBackend.jar" />
+		<delete failonerror="false" file="lib/JFireRCLBackendBean.jar" />
+		<delete failonerror="false" file="lib/JFireRemoteClassLoader.jar" />
+		-->
+	</target>
+	
+	<target name="build" depends="init, clean">
+		<!--
+		<jar destfile="lib/JFireRCLBackend.jar">
+			<fileset dir="../JFireRCLBackend/bin" includes="**/*"/>
+		</jar>
+		<jar destfile="lib/JFireRCLBackendBean.jar">
+			<fileset dir="../JFireRCLBackendBean/bin" includes="**/*"/>
+		</jar>
+		<jar destfile="lib/JFireRemoteClassLoader.jar">
+			<fileset dir="../JFireRemoteClassLoader/bin" includes="**/*"/>
+		</jar>
+		-->
+	</target>
+</project>

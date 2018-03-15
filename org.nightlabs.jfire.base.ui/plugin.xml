@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <!-- Extension-points -->
+    <extension-point id="loginstatelistener" name="Login State Listener" schema="schema/loginstatelistener.exsd"/>
+    <!-- I think, these are really not necessary anymore...		
+   <extension-point 
+   		id="person_edit_personDataFieldEditorFactory" 
+   		name="Defines a editor factory for a specific subclass of AbstractPersonDataField" 
+   		schema="schema/person_edit_personDataFieldEditorFactory.exsd"
+   	/>
+   	
+   <extension-point 
+   		id="person_edit_specializedDataBlockEditor" 
+   		name="Specialized PersonDataBlockEditors" 
+   		schema="schema/person_edit_specializedDataBlockEditor.exsd"
+   	/>
+-->
+    <extension-point id="configsetupvisualiser"
+        name="ConfigSetupVisualiser extension-point" schema="schema/configsetupvisualiser.exsd"/>
+    <extension-point id="specialisedDataBlockEditor"
+        name="Specialised PropDataBlockEditors" schema="schema/specialisedDataBlockEditor.exsd"/>
+    <extension-point id="propDataFieldEditorFactory"
+        name="Defines a editor factory for a specific subclass of AbstractPersonDataField" schema="schema/propDataFieldEditorFactory.exsd"/>
+    <extension-point id="propStructField" name="propStructField" schema="schema/propStructField.exsd"/>
+    <extension-point id="overview" name="overview" schema="schema/overview.exsd"/>
+    <extension-point id="quickSearchEntry" name="quickSearchEntry" schema="schema/quicksearchentry.exsd"/>
+    <extension-point id="queryFilterComposite"
+        name="QueryFilterComposite" schema="schema/queryFilterComposite.exsd"/>
+    <!-- Extensions -->
+    <!-- 
+        Pruduct and application.
+        Main entry to the workbench and branding.
+   -->
+    <extension id="app" name="%app.name" point="org.eclipse.core.runtime.applications">
+        <application>
+            <run class="org.nightlabs.jfire.base.ui.app.JFireApplication"/>
+        </application>
+    </extension>
+    <extension id="product" point="org.eclipse.core.runtime.products">
+        <product application="org.nightlabs.jfire.base.ui.app" name="%app.name">
+            <property name="appName" value="%app.name"/>
+            <property name="windowImages" value="icons/JFire-Logo.16x16.png"/>
+            <property name="aboutText" value="%aboutText"/>
+            <property name="aboutImage" value="icons/JFire-Flame.80x160.jpg"/>
+            <property name="preferenceCustomization" value="plugin_customization.ini"/>
+            <property name="startupForegroundColor" value="000000"/>
+            <property name="startupMessageRect" value="7,238,400,20"/>
+            <property name="startupProgressRect" value="0,258,400,15"/>
+        </product>
+    </extension>
+    <!-- Perspectives and Views
+   -->
+    <extension point="org.eclipse.ui.perspectives">
+        <perspective
+            class="org.nightlabs.jfire.base.ui.JFireWelcomePerspective"
+            fixed="false" icon="icons/JFire-Icon.16x16.png"
+            id="org.nightlabs.jfire.base.ui.JFireWelcomePerspective" name="%org.nightlabs.jfire.base.ui.JFireWelcomePerspective.name"/>
+    </extension>
+    <!-- Actions 
+   -->
+    <extension point="org.eclipse.ui.actionSets">
+        <actionSet id="org.nightlabs.jfire.base.ui.login.actions"
+            label="%org.nightlabs.jfire.base.ui.login.actions.label" visible="true">
+            <menu id="loginMenu" label="%loginMenu.label">
+                <separator name="loginGroup"/>
+            </menu>
+            <action
+                class="org.nightlabs.jfire.base.ui.login.action.LoginAction"
+                icon="icons/login/action/LoginAction-Login.24x24.png"
+                id="org.nightlabs.jfire.base.ui.login.action.LoginAction#toolbar"
+                label="%org.nightlabs.jfire.base.ui.login.action.LoginAction.label"
+                toolbarPath="loginGroup" tooltip="%org.nightlabs.jfire.base.ui.login.action.LoginAction.toolTip"/>
+            <action
+                class="org.nightlabs.jfire.base.ui.password.ChangePasswordAction"
+                icon="icons/password/ChangePasswortAction.16x16.gif"
+                id="org.nightlabs.jfire.base.ui.password.ChangePasswortAction"
+                label="%org.nightlabs.jfire.base.ui.password.ChangePasswortAction.label"
+                menubarPath="loginMenu/loginGroup" tooltip="%org.nightlabs.jfire.base.ui.password.ChangePasswortAction.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.ui.login.action.LoginAction"
+                icon="icons/login/action/LoginAction-Login.16x16.png"
+                id="org.nightlabs.jfire.base.ui.login.action.LoginAction#menu"
+                label="%org.nightlabs.jfire.base.ui.login.action.LoginAction.label"
+                menubarPath="loginMenu/loginGroup" tooltip="%org.nightlabs.jfire.base.ui.login.action.LoginAction.toolTip"/>
+        </actionSet>
+        <actionSet id="org.nightlabs.jfire.base.ui.jdo.cache.actions"
+            label="%org.nightlabs.jfire.base.ui.jdo.cache.actions.label" visible="true">
+            <action
+                class="org.nightlabs.jfire.base.ui.jdo.cache.RefreshAllAction"
+                id="org.nightlabs.jfire.base.ui.jdo.cache.RefreshAllAction"
+                label="%org.nightlabs.jfire.base.ui.jdo.cache.RefreshAllAction.label"
+                menubarPath="help/additions" tooltip="%org.nightlabs.jfire.base.ui.jdo.cache.RefreshAllAction.tooltip"/>
+        </actionSet>
+    </extension>
+    <extension point="org.nightlabs.jfire.base.ui.loginstatelistener">
+        <loginStateListener class="org.nightlabs.jfire.base.ui.language.LanguageWatcher"/>
+    </extension>
+    <!--
+  This is registered now by the class Login programmatically, because this Interceptor is on the server and the SelectionManager
+  might be used already while still being offline. This would cause a ClassNotFoundException.
+  <extension
+        point="org.nightlabs.base.ui.notificationinterceptor">
+     <notificationInterceptor
+           class="org.nightlabs.jfire.base.ui.jdo.JDOObjectID2PCClassNotificationInterceptor"
+           name="JDO ObjectID to PersistenceCapable Interceptor"/>
+  </extension>
+-->
+    <extension point="org.nightlabs.jfire.base.ui.configsetupvisualiser">
+        <visualiser
+            class="org.nightlabs.jfire.base.ui.config.UserCSVisualiser" configSetupType="org.nightlabs.jfire.config.UserConfigSetup"/>
+        <visualiser
+            class="org.nightlabs.jfire.base.ui.config.WorkstationCSVisualiser" configSetupType="org.nightlabs.jfire.config.WorkstationConfigSetup"/>
+    </extension>
+    <extension point="org.nightlabs.base.ui.cache">
+        <cacheFactory class="org.nightlabs.jfire.base.ui.jdo.cache.CacheFactory"/>
+    </extension>
+    <!-- Prop extensions -->
+    <extension point="org.nightlabs.jfire.base.ui.propStructField">
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.TextStructField"
+            description="%org.nightlabs.jfire.prop.structfield.TextStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.TextStructFieldEditor$TextStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.TextStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.TextStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.SelectionStructField"
+            description="%org.nightlabs.jfire.prop.structfield.SelectionStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.SelectionStructFieldEditor$SelectionStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.SelectionStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.SelectionStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.MultiSelectionStructField"
+            description="%org.nightlabs.jfire.prop.structfield.MultiSelectionStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.MultiSelectionStructFieldEditor$MultiSelectionStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.MultiSelectionStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.MultiSelectionStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.RegexStructField"
+            description="%org.nightlabs.jfire.prop.structfield.RegexStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.RegexStructFieldEditor$RegexStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.RegexStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.RegexStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.NumberStructField"
+            description="%org.nightlabs.jfire.prop.structfield.NumberStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.NumberStructFieldEditor$NumberStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.NumberStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.NumberStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.ImageStructField"
+            description="%org.nightlabs.jfire.prop.structfield.ImageStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.ImageStructFieldEditor$ImageStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.ImageStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.ImageStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.DateStructField"
+            description="%org.nightlabs.jfire.prop.structfield.DateStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.DateStructFieldEditor$DateStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.DateStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.DateStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.PhoneNumberStructField"
+            description="%org.nightlabs.jfire.prop.structfield.PhoneNumberStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.DefaultStructFieldEditor$DefaultStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.PhoneNumberStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.PhoneNumberStructField.name"/>
+        <propStructField
+            class="org.nightlabs.jfire.prop.structfield.I18nTextStructField"
+            description="%org.nightlabs.jfire.prop.structfield.I18nTextStructField.description"
+            editorFactoryClass="org.nightlabs.jfire.base.ui.prop.structedit.I18nTextStructFieldEditor$I18nTextStructFieldEditorFactory"
+            factoryClass="org.nightlabs.jfire.base.ui.prop.structedit.I18nTextStructFieldFactory" name="%org.nightlabs.jfire.prop.structfield.I18nTextStructField.name"/>
+    </extension>
+    <extension
+        id="org.nightlabs.jfire.person.edit.blockbased.special.PersonalDataBlockEditor" point="org.nightlabs.jfire.base.ui.specialisedDataBlockEditor">
+        <specialisedDataBlockEditor class="org.nightlabs.jfire.base.ui.person.edit.blockbased.special.PersonalDataBlockEditor$Factory"/>
+    </extension>
+    <extension point="org.nightlabs.jfire.base.ui.propDataFieldEditorFactory">
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.TextDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.SelectionDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.MultiSelectionDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.ImageDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.DateDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.NumberDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.RegexDataFieldEditor$Factory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.PhoneNumberDataFieldEditor$PhoneNumberDataFieldEditorFactory"/>
+        <propDataFieldEditorFactory class="org.nightlabs.jfire.base.ui.prop.edit.blockbased.I18nTextDataFieldEditor$Factory"/>
+    </extension>
+    <extension point="org.nightlabs.base.ui.login">
+        <login class="org.nightlabs.jfire.base.ui.login.LoginDelegate"/>
+    </extension>
+    
+    <extension point="org.nightlabs.base.ui.removeExtension">
+        <removeExtension attributeName="id"
+            attributePattern="org.eclipse.ui.edit.text.actionSet.navigation"
+            elementPath="actionSet" extensionPointID="org.eclipse.ui.actionSets"/>
+        <removeExtension attributeName="id"
+            attributePattern="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"
+            elementPath="actionSet" extensionPointID="org.eclipse.ui.actionSets"/>
+        <removeExtension attributeName="id"
+            attributePattern="org.eclipse.ui.WorkingSetActionSet"
+            elementPath="actionSet" extensionPointID="org.eclipse.ui.actionSets"/>
+        <removeExtension attributeName="id"
+            attributePattern=".*eclipse.*resource.*"
+            elementPath="perspective" extensionPointID="org.eclipse.ui.perspectives"/>
+        <removeExtension attributeName="class"
+            attributePattern="org.eclipse.help.ui.internal.preferences.HelpPreferencePage"
+            elementPath="page" extensionPointID="org.eclipse.ui.preferencePages"/>
+        <removeExtension attributeName="class"
+            attributePattern="org.eclipse.help.ui.internal.preferences.HelpContentPreferencePage"
+            elementPath="page" extensionPointID="org.eclipse.ui.preferencePages"/>
+        <removeExtension
+              attributeName="class"
+              attributePattern="org.eclipse.update.internal.ui.preferences.MainPreferencePage"
+              elementPath="page"
+              extensionPointID="org.eclipse.ui.preferencePages">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.update.scheduler.AutomaticUpdatesPreferencePage"
+              elementPath="page"
+              extensionPointID="org.eclipse.ui.preferencePages">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.update.ui.softwareUpdates"
+              elementPath="actionSet"
+              extensionPointID="org.eclipse.ui.actionSets">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.cheatsheets.actionSet"
+              elementPath="actionSet"
+              extensionPointID="org.eclipse.ui.actionSets">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.console.ConsoleView"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.views.BookmarkView"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.views.TaskList"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.views.ProblemView"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.views.ResourceNavigator"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.cheatsheets.views.CheatSheetView"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.navigator.ProjectExplorer"
+              elementPath="view"
+              extensionPointID="org.eclipse.ui.views">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.editors.wizards.UntitledTextFileWizard"
+              elementPath="wizard"
+              extensionPointID="org.eclipse.ui.newWizards">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.wizards.new.project"
+              elementPath="wizard"
+              extensionPointID="org.eclipse.ui.newWizards">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.wizards.new.folder"
+              elementPath="wizard"
+              extensionPointID="org.eclipse.ui.newWizards">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.wizards.new.file"
+              elementPath="wizard"
+              extensionPointID="org.eclipse.ui.newWizards">
+        </removeExtension>
+        <removeExtension
+              attributeName="id"
+              attributePattern="org.eclipse.ui.Basic"
+              elementPath="category"
+              extensionPointID="org.eclipse.ui.newWizards">
+        </removeExtension>
+    </extension>
+    
+    <extension point="org.nightlabs.base.ui.exceptionhandler">
+    	<!--
+    		https://www.jfire.org/modules/bugs/view.php?id=1292
+    		With EJB3, we get a javax.ejb.EJBAccessException rather than a java.lang.SecurityException. However,
+    		I'm not sure, if the SecurityException might still be thrown in some circumstances. Thus, we keep this
+    		registration and additionally register the handler for javax.ejb.EJBAccessException below.
+    	-->
+        <exceptionHandler
+            class="org.nightlabs.jfire.base.ui.exceptionhandler.InsufficientPermissionHandler"
+            name="Insufficient permissions: Handler showing the user which role groups are required."
+            priority="150" targetType="java.lang.SecurityException"/>
+        <exceptionHandler
+            class="org.nightlabs.jfire.base.ui.exceptionhandler.InsufficientPermissionHandler"
+            name="Insufficient permissions: Handler showing the user which role groups are required."
+            priority="100" targetType="javax.ejb.EJBAccessException"/>
+        <exceptionHandler
+            class="org.nightlabs.jfire.base.ui.exceptionhandler.ConnectExceptionHandler"
+            name="Connection refused. Handler showing a user friendly message when the connection is refused" targetType="java.net.ConnectException"/>
+    </extension>
+    <extension point="org.nightlabs.jfire.base.ui.loginstatelistener">
+        <loginStateListener class="org.nightlabs.jfire.base.ui.login.part.LoginStateListenerForCloseOnLogoutEditorParts"/>
+        <loginStateListener class="org.nightlabs.jfire.base.ui.exceptionhandler.LoginStateListenerForScreenShotCfg"/>
+        <loginStateListener class="org.nightlabs.jfire.base.ui.security.SecurityReflectorRCPLoginStateListener"/>
+        <loginStateListener class="org.nightlabs.jfire.base.ui.editlock.EditLockManLoginStateListener"/>
+        <loginStateListener class="org.nightlabs.jfire.base.ui.login.TimeCheckLoginStateListener"/>
+        <loginStateListener
+              class="org.nightlabs.jfire.base.ui.prop.config.PropertySetFieldBasedEditLayoutPreferenceLoginStateListener">
+        </loginStateListener>
+        <loginStateListener
+              class="org.nightlabs.jfire.base.ui.login.ClearRCLCacheListener">
+        </loginStateListener>
+    </extension>
+<!-- Added here because of removeExtension of views registered in org.eclipse.ui.ide (e.g. ProblemView) also removed ProgressView -->
+    <extension
+          point="org.eclipse.ui.views">
+      <view
+            name="%org.eclipse.ui.internal.progress.ProgressView.name"
+            icon="/icons/ProgressView.16x16.gif"
+            category="org.eclipse.ui"
+            class="org.eclipse.ui.internal.progress.ProgressView"
+            id="org.eclipse.ui.views.ProgressView">
+      </view>          
+    </extension>
+    
+    <!--
+    <extension
+          point="org.eclipse.ui.preferencePages">
+       <page
+             class="org.nightlabs.jfire.base.ui.prop.config.PropertySetFieldBasedEditLayoutPreferencePage"
+             id="org.nightlabs.jfire.base.ui.prop.config.PropertySetFieldBasedEditLayoutPreferencePage"
+             name="FieldBasedEditLayout">
+       </page>
+    </extension>
+    -->
+</plugin>

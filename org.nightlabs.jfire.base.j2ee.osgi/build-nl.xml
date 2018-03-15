@@ -1,0 +1,70 @@
+<project default="build">
+	<target name="build">
+		<delete verbose="true">
+			<fileset dir="src/org/nightlabs/classloader">
+				<!--
+				  Delete all the *old* stuff in order to ensure clean-up.
+				  TODO Remove this fileset later.
+				  2009-05-27, Marco.
+				-->
+				<include name="*"/>
+			</fileset>
+			<fileset dir="src/org/nightlabs/classloader/delegating">
+				<include name="*"/>
+				<exclude name="README.txt"/>
+			</fileset>
+		</delete>
+		<copy todir="src/org/nightlabs/classloader/delegating" verbose="true" failonerror="true" overwrite="true">
+			<fileset dir="../DelegatingClassLoader/src/org/nightlabs/classloader/delegating">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+		<!--
+		  TODO dirty workaround! We need to think about a clean solution - there are many different target platforms.
+This workaround is IMHO not necessary anymore since a clean solution exists in target-rcp-jfire-min-rcl.
+		->
+		<!- first compile ->
+		<delete failonerror="false" verbose="true" dir="bin" />
+		<mkdir dir="bin"/>
+		<path id="compileCP">
+			<fileset dir=".." includes="target-rcp-jfire-max-win32/target/plugins/org.eclipse.osgi*.jar"/>
+			<fileset dir=".." includes="target-rcp-jfire-max-linux-gtk-x86_64/target/plugins/org.eclipse.osgi*.jar"/>
+			<fileset dir=".." includes="target-rcp-jfire-max-linux-gtk-x86/target/plugins/org.eclipse.osgi*.jar"/>
+		</path>
+		<javac debug="true" encoding="UTF-8" source="6" target="6" destdir="bin" classpathref="compileCP">
+			<src path="src"/>
+		</javac>
+
+		<!- then JAR it ->
+		<mkdir dir="dist"/>
+		<jar
+			destfile="dist/org.nightlabs.jfire.base.j2ee.osgi_0.9.7.local.jar"
+			manifest="META-INF/MANIFEST.MF"
+		>
+			<fileset dir="bin" includes="**/*"/>
+			<fileset dir="." includes="hookconfigurators.properties"/>
+		</jar>
+		
+		<!- and finally deploy ->
+		<copy
+			failonerror="false"
+			todir="../target-rcp-jfire-max-win32/target/plugins"
+		>
+			<fileset dir="dist" includes="*.jar" />
+		</copy>
+		<copy
+			failonerror="false"
+			todir="../target-rcp-jfire-max-linux-gtk-x86_64/target/plugins"
+		>
+			<fileset dir="dist" includes="*.jar" />
+		</copy>
+		<copy
+			failonerror="false"
+			todir="../target-rcp-jfire-max-linux-gtk-x86/target/plugins"
+		>
+			<fileset dir="dist" includes="*.jar" />
+		</copy>
+-->
+	</target>
+</project>

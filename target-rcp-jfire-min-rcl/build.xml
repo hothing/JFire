@@ -1,0 +1,71 @@
+<project default="build">
+
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+
+	<target name="build" depends="init">
+		<tstamp/>
+		
+		<path id="compile.path">
+			<fileset dir="lib"><include name="*.jar"/></fileset>
+		</path>
+
+		<!-- copy all java sources from DelegatingClassLoader to org.nightlabs.jfire.base.j2ee.osgi --> 
+		<copy todir="../org.nightlabs.jfire.base.j2ee.osgi/src">
+			<fileset dir="../DelegatingClassLoader/src" includes="**/*"/>
+		</copy>
+		<!-- compile org.nightlabs.jfire.base.j2ee.osgi -->
+		<mkdir dir="../org.nightlabs.jfire.base.j2ee.osgi/bin"/>
+		<copy todir="../org.nightlabs.jfire.base.j2ee.osgi/bin">
+			<fileset dir="../org.nightlabs.jfire.base.j2ee.osgi/src" excludes="**/*.java"/>
+		</copy>
+		<javac
+			classpathref="compile.path"
+			debug="true"
+			srcdir="../org.nightlabs.jfire.base.j2ee.osgi/src"
+			destdir="../org.nightlabs.jfire.base.j2ee.osgi/bin"
+		/>
+		
+		<grep
+				property="project.versionwithoutqualifier"
+				srcFile="../org.nightlabs.jfire.base.j2ee.osgi/META-INF/MANIFEST.MF"
+				pattern="^Bundle-Version:\s*(.+)\.qualifier$"/>
+		
+		<mkdir dir="${target}/plugins"/>
+		<!-- added the version as it seems not to work without... :-( -->
+		<jar destfile="${target}/plugins/org.nightlabs.jfire.base.j2ee.osgi_${project.versionwithoutqualifier}.${DSTAMP}${TSTAMP}.jar" manifest="../org.nightlabs.jfire.base.j2ee.osgi/META-INF/MANIFEST.MF">
+			<fileset dir="../org.nightlabs.jfire.base.j2ee.osgi/bin"/>
+			<fileset dir="../org.nightlabs.jfire.base.j2ee.osgi" includes="hookconfigurators.properties"/>
+		</jar>
+	</target>
+	
+	<macrodef name="grep">
+       <attribute name="srcFile"/>
+        <attribute name="property"/>
+        <attribute name="pattern"/>
+    	<attribute name="replace" default="\1"/>
+        <sequential>
+    		<loadfile
+    		      property="@{property}"
+    		      srcFile="@{srcFile}">
+    		      <filterchain>
+    		        <tokenfilter>
+    		          <containsregex 
+    		          	pattern="@{pattern}"
+    		          	replace="@{replace}"
+    		          />
+    		        </tokenfilter>
+    		        <striplinebreaks/>
+    		      </filterchain>
+    		    </loadfile>
+    	</sequential>
+    </macrodef>
+
+</project>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+    <extension point="org.eclipse.ui.perspectives">
+        <perspective
+            class="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective"
+            fixed="false"
+            icon="icons/systemadministration_perspective.new.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective" name="%perspectives.systemAdministration"/>
+        <perspective
+            class="org.nightlabs.jfire.base.admin.ui.timer.TimerPerspective"
+            icon="icons/timer/TimerPerspective.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.timer.TimerPerspective" name="%perspectives.timer"/>
+    </extension>
+    <extension point="org.eclipse.ui.views">
+        <category id="org.nightlabs.jfire.base.admin.ui" name="%viewcategories.administration"/>
+        <view category="org.nightlabs.jfire.base.admin.ui"
+            class="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"
+            icon="icons/editor/SysAdminEntityTreeView.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView" name="%views.entityTree"/>
+        <view category="org.nightlabs.jfire.base.admin.ui"
+            class="org.nightlabs.jfire.base.admin.ui.organisation.registration.PendingOrganisationRegistrationsView"
+            icon="icons/organisation/registration/PendingOrganisationRegistrationsView.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.organisation.registration.PendingOrganisationRegistrationsView" name="%views.pendingOrganisationRegistrations"/>
+        <view category="org.nightlabs.jfire.base.admin.ui"
+            class="org.nightlabs.jfire.base.admin.ui.timer.TaskListView"
+            icon="icons/timer/TaskListView.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.timer.TaskListView" name="%views.timerTasks"/>
+        <view category="org.nightlabs.jfire.base.admin.ui"
+            class="org.nightlabs.jfire.base.admin.ui.timer.TaskDetailView"
+            icon="icons/timer/TaskDetailView.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.timer.TaskDetailView" name="%views.timerTaskDetail"/>
+        <view category="org.nightlabs.jfire.base.admin.ui"
+            class="org.nightlabs.jfire.base.admin.ui.asyncinvoke.AsyncInvokeProblemView"
+            id="org.nightlabs.jfire.base.admin.ui.asyncinvoke.AsyncInvokeProblemView" name="%org.nightlabs.jfire.base.admin.ui.asyncinvoke.AsyncInvokeProblemView.name"/>
+    </extension>
+    <extension point="org.eclipse.ui.actionSets">
+        <actionSet id="org.nightlabs.jfire.base.admin.ui.actions"
+            label="%org.nightlabs.jfire.base.admin.ui.actions.label" visible="false">
+            <menu id="administrationMenu" label="%administrationMenu.label">
+                <separator name="organisationGroup"/>
+                <separator name="entityGroup"/>
+                <!-- DEPRECTATED: was only for testing
+            <separator name="customerGroup"/>
+            -->
+            </menu>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.organisation.registration.RegisterOrganisationAction"
+                icon="icons/registerOrganisation16.gif"
+                id="org.nightlabs.jfire.base.admin.ui.organisation.registration.RegisterOrganisationAction"
+                label="%actions.registerOrganisation.label"
+                menubarPath="administrationMenu/organisationGroup"
+                style="push" tooltip="%actions.registerOrganisation.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.organisation.registration.RegisterInRootOrganisationAction"
+                id="org.nightlabs.jfire.base.admin.ui.organisation.registration.RegisterInRootOrganisationAction"
+                label="Register in root organisation"
+                menubarPath="administrationMenu/organisationGroup"
+                style="push"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.organisation.create.CreateOrganisationAction"
+                icon="icons/organisation/create/CreateOrganisationAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.organisation.create.CreateOrganisationAction"
+                label="%actions.createOrganisation.label"
+                menubarPath="administrationMenu/organisationGroup" tooltip="%actions.createOrganisation.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.configgroup.CreateWorkstationConfigGroupAction"
+                icon="icons/configgroup/CreateWorkstationConfigGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.configgroup.CreateWorkstationConfigGroupAction#menu"
+                label="%actions.createWorkstationConfigGroup.label"
+                menubarPath="administrationMenu/entityGroup" tooltip="%actions.createWorkstationConfigGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationAction"
+                icon="icons/workstation/CreateWorkstationAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationAction#menu"
+                label="%actions.createWorkstationAction.label"
+                menubarPath="administrationMenu/entityGroup" tooltip="%actions.createWorkstationAction.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.configgroup.CreateUserConfigGroupAction"
+                icon="icons/configgroup/CreateUserConfigGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.configgroup.CreateUserConfigGroupAction#menu"
+                label="%actions.createUserConfigGroup.label "
+                menubarPath="administrationMenu/entityGroup" tooltip="%actions.createUserConfigGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupAction"
+                icon="icons/usersecuritygroup/CreateUserGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupAction#menu"
+                label="%actions.createUserGroup.label"
+                menubarPath="administrationMenu/entityGroup" tooltip="%actions.createUserGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.user.CreateUserAction"
+                icon="icons/user/CreateUserAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.user.CreateUserAction#menu"
+                label="%actions.createUser.label"
+                menubarPath="administrationMenu/entityGroup" tooltip="%actions.createUser.tooltip"/>
+            <action
+                  class="org.nightlabs.jfire.base.admin.ui.rolegroup.GrantRolegroupsAction"
+                  enablesFor="+"
+                  id="org.nightlabs.jfire.base.admin.ui.rolegroups.GrantRolegroupsAction"
+                  label="%actions.grantrolegroups.label "
+                  menubarPath="administrationMenu/organisationGroup"
+                  style="push">
+            </action>
+        </actionSet>
+    </extension>
+    <!--
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective">
+			<actionSet id="org.nightlabs.jfire.base.admin.ui.actions"/>
+		</perspectiveExtension>
+	</extension>
+	-->
+    <!-- funtioniert nicht so wie es sollte: -->
+    <!-- ich glaube, es wird überhaupt nicht mehr benutzt:
+    <extension point="org.eclipse.ui.actionSetPartAssociations">
+        <actionSetPartAssociation targetID="org.nightlabs.jfire.base.admin.ui.actions">
+            <part id="org.nightlabs.jfire.base.admin.ui.views.EntityListView"/>
+        </actionSetPartAssociation>
+    </extension>
+    -->
+    <extension
+        id="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective.extension" point="org.eclipse.ui.perspectiveExtensions">
+        <perspectiveExtension targetID="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective">
+            <actionSet id="org.nightlabs.jfire.base.admin.ui.actions"/>
+        </perspectiveExtension>
+    </extension>
+    <extension point="org.eclipse.ui.viewActions">
+        <viewContribution
+            id="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView" targetID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView">
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.configgroup.CreateWorkstationConfigGroupAction"
+                icon="icons/configgroup/CreateWorkstationConfigGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.configgroup.CreateWorkstationConfigGroupAction"
+                label="%actions.createWorkstationConfigGroup.label"
+                style="push" toolbarPath="additions" tooltip="%actions.createWorkstationConfigGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationAction"
+                icon="icons/workstation/CreateWorkstationAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationAction"
+                label="%actions.createWorkstationAction.label"
+                style="push" toolbarPath="additions" tooltip="%actions.createWorkstationAction.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.configgroup.CreateUserConfigGroupAction"
+                icon="icons/configgroup/CreateUserConfigGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.configgroup.CreateUserConfigGroupAction"
+                label="%actions.createUserConfigGroup.label"
+                style="push" toolbarPath="additions" tooltip="%actions.createUserConfigGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupAction"
+                icon="icons/usersecuritygroup/CreateUserGroupAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupAction"
+                label="%actions.createUserGroup.label" style="push"
+                toolbarPath="additions" tooltip="%actions.createUserGroup.tooltip"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.user.CreateUserAction"
+                icon="icons/user/CreateUserAction.16x16.png"
+                id="org.nightlabs.jfire.base.admin.ui.user.CreateUserAction"
+                label="%actions.createUser.label" style="push"
+                toolbarPath="additions" tooltip="%actions.createUser.tooltip"/>
+        </viewContribution>
+        <viewContribution
+            id="org.nightlabs.jfire.base.admin.ui.timer.TaskDetailView" targetID="org.nightlabs.jfire.base.admin.ui.timer.TaskDetailView">
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.timer.action.SubmitTaskDetailViewAction"
+                enablesFor="+"
+                id="org.nightlabs.jfire.base.admin.ui.timer.action.SubmitTaskDetailViewAction"
+                label="%org.nightlabs.jfire.base.admin.ui.timer.action.SubmitTaskDetailViewAction.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.timer.action.RemoveTimePatternsViewAction"
+                enablesFor="+"
+                id="org.nightlabs.jfire.base.admin.ui.timer.action.RemoveTimePatternsViewAction"
+                label="%org.nightlabs.jfire.base.admin.ui.timer.action.RemoveTimePatternsViewAction.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.timer.action.CreateTimePatternViewAction"
+                enablesFor="+"
+                id="org.nightlabs.jfire.base.admin.ui.timer.action.CreateTimePatternViewAction"
+                label="%org.nightlabs.jfire.base.admin.ui.timer.action.CreateTimePatternViewAction.label"
+                style="push" toolbarPath="additions"/>
+        </viewContribution>
+
+		<viewContribution
+            id="org.nightlabs.jfire.base.admin.ui.asyncinvoke.AsyncInvokeProblemView" targetID="org.nightlabs.jfire.base.admin.ui.asyncinvoke.AsyncInvokeProblemView">
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.asyncinvoke.DeleteViewAction"
+                enablesFor="+"
+                id="org.nightlabs.jfire.base.admin.ui.asyncinvoke.DeleteViewAction"
+                label="%org.nightlabs.jfire.base.admin.ui.asyncinvoke.DeleteViewAction.label"
+                style="push" toolbarPath="additions"/>
+            <action
+                class="org.nightlabs.jfire.base.admin.ui.asyncinvoke.RetryViewAction"
+                enablesFor="+"
+                id="org.nightlabs.jfire.base.admin.ui.asyncinvoke.RetryViewAction"
+                label="%org.nightlabs.jfire.base.admin.ui.asyncinvoke.RetryViewAction.label"
+                style="push" toolbarPath="additions"/>
+        </viewContribution>
+    </extension>
+    <!--   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.nightlabs.jfire.base.admin.ui.preferencepages.UserConfigGroupsPreferencePage"
+            id="org.nightlabs.jfire.base.admin.ui.preferencepages.UserConfigGroupsPreferencePage"
+            name="Userconfig groups"/>
+      <page
+            category="org.nightlabs.jfire.base.admin.ui.preferencepages.UserConfigGroupsPreferencePage"
+            class="org.nightlabs.jfire.base.admin.ui.preferencepages.UserConfigGroupMembersPreferencePage"
+            id="org.nightlabs.jfire.base.admin.ui.preferencepages.UserConfigGroupMembersPreferencePage"
+            name="Userconfig group members"/>
+   </extension>
+   -->
+<!-- this extension-point has been moved into project org.nightlabs.base.ui
+    <extension-point id="entityeditor" name="org.nightlabs.jfire.base.admin.ui.entityeditor" schema="schema/entityeditor.exsd"/>
+-->
+    <extension point="org.eclipse.ui.editors">
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor"
+            icon="icons/editor/user/UserEditor.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor" name="%org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor"
+            icon="icons/editor/usersecuritygroup/UserSecurityGroupEditor.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor" name="%org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor"
+            default="false"
+            icon="icons/editor/workstation/WorkstationEditor.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor" name="%org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor"
+            default="false"
+            icon="icons/configgroup/WorkstationConfigGroup.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor" name="%org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor"
+            default="false"
+            icon="icons/configgroup/CreateUserConfigGroupAction.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor" name="%org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.prop.StructLocalEditor"
+            default="false" icon="icons/property_set_structures.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.prop.StructLocalEditor" name="%org.nightlabs.jfire.base.admin.ui.prop.StructLocalEditor.name"/>
+        <editor
+            class="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor"
+            default="false" icon="icons/keys.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor"
+            name="%org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor.name"/>
+        <editor
+              class="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.LocalOrganisationEditor"
+              icon="icons/editor/localorganisation/LocalOrganisationEditor.16x16.png"
+              id="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.OrganisationEditor"
+              name="%org.nightlabs.jfire.base.admin.ui.editor.localorganisation.OrganisationEditor.name">
+        </editor>
+    </extension>
+    <extension
+          point="org.nightlabs.base.ui.entityEditor">
+       <category
+             class="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.EntityTreeCategoryLocalOrganisation"
+             icon="icons/editor/localorganisation/EntityTreeCategoryLocalOrganisation.16x16.png"
+             id="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.EntityTreeCategoryLocalOrganisation"
+             name="%entityEditor.category.localorganisation">
+          <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.OrganisationEditor"
+                indexHint="1"
+                viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView">
+          </viewBinding>
+       </category>
+       <pageFactory
+             class="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.LocalOrganisationPropertiesPage$Factory"
+             editorID="org.nightlabs.jfire.base.admin.ui.editor.localorganisation.OrganisationEditor"
+             indexHint="10">
+       </pageFactory>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.EntityTreeCategoryUser"
+            icon="icons/editor/user/EntityTreeCategoryUser.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.user.EntityTreeCategoryUser" name="%entityEditor.category.user">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor"
+                indexHint="5" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.UserPersonPreferencePage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor" indexHint="10"/>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.UserSecurityPreferencesPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor" indexHint="20"/>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.ConfigPreferencesPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor" indexHint="30"/>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.EntityTreeCategoryUserSecurityGroup"
+            icon="icons/editor/usersecuritygroup/EntityTreeCategoryUserGroup.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.usergroup.EntityTreeCategoryUserGroup" name="%entityEditor.category.userGroup">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor"
+                indexHint="10" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.UserGroupPreferencePage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor" indexHint="10"/>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.GroupSecurityPreferencesPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor" indexHint="20"/>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.organisationuser.EntityTreeCategoryOrganisationUser"
+            icon="icons/editor/organisationuser/EntityTreeCategoryOrganisationUser.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.organisationuser.EntityTreeCategoryOrganisationUser" name="%entityEditor.category.organisationUsers">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor"
+                indexHint="3" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstation.EntityTreeCategoryWorkstation"
+            icon="icons/editor/workstation/EntityTreeCategoryWorkstation.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.workstation.EntityTreeCategoryWorkstation" name="%entityEditor.category.workstation">
+           <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor"
+                indexHint="20" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+              class="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationGeneralPreferencesTabPage$Factory"
+              editorID="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor"
+              indexHint="10">
+        </pageFactory>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationFeaturePreferencesTabPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor" indexHint="20"/>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.EntityTreeCategoryWorkstationGroup"
+            icon="icons/configgroup/WorkstationConfigGroup.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.workstation.EntityTreeCategoryWorkstationGroup" name="%entityEditor.category.workstationConfigGroup">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+              class="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.ConfigGroupGeneralPreferencesTabPage$Factory"
+              editorID="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor"
+              indexHint="10">
+        </pageFactory>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationFeaturePreferencesTabPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor" indexHint="20"/>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupMemberPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.workstationgroup.WorkstationGroupEditor" indexHint="30"/>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.EntityTreeCategoryUserConfigGroup"
+            icon="icons/configgroup/CreateUserConfigGroupAction.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.EntityTreeCategoryUserConfigGroup" name="%entityEditor.category.userConfigGroup">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+              class="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.ConfigGroupGeneralPreferencesTabPage$Factory"
+              editorID="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor"
+              indexHint="10">
+        </pageFactory>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.user.ConfigPreferencesPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor" indexHint="20"/>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupMemberPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.editor.userconfiggroup.UserConfigGroupEditor" indexHint="30"/>
+        <category
+            class="org.nightlabs.jfire.base.admin.ui.editor.prop.EntityTreeCategoryPropertyStructLocal"
+            icon="icons/property_set_structures.16x16.png"
+            id="org.nightlabs.jfire.base.admin.ui.prop.EntityTreeCategoryPropertyStruct" name="%entityEditor.category.propertyStruct">
+            <viewBinding
+                editorID="org.nightlabs.jfire.base.admin.ui.prop.StructLocalEditor" viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView"/>
+        </category>
+        <pageFactory
+            class="org.nightlabs.jfire.base.admin.ui.editor.prop.StructEditorPage$Factory"
+            editorID="org.nightlabs.jfire.base.admin.ui.prop.StructLocalEditor" indexHint="10"/>
+        <category
+              class="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.EntityTreeCategoryAuthorityType"
+              icon="icons/keys.png"
+              id="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.EntityTreeCategoryAuthorityType"
+              name="%entityEditor.category.authorityType">
+           <viewBinding
+                 editorID="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor"
+                 viewID="org.nightlabs.jfire.base.admin.ui.editor.SysAdminEntityTreeView">
+           </viewBinding>
+        </category>
+        <pageFactory
+              class="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeDetailPage$Factory"
+              editorID="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor"
+              indexHint="10">
+        </pageFactory>
+        <pageFactory
+              class="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityPage$Factory"
+              editorID="org.nightlabs.jfire.base.admin.ui.editor.authoritytype.AuthorityTypeEditor"
+              indexHint="20">
+        </pageFactory>
+    </extension>
+    <extension
+          point="org.eclipse.ui.newWizards">
+       <category
+             id="org.nightlabs.jfire.base.admin.ui"
+             name="%org.nightlabs.jfire.base.admin.ui.newWizard.category.name">
+       </category>
+       <wizard
+             category="org.nightlabs.jfire.base.admin.ui"
+             class="org.nightlabs.jfire.base.admin.ui.user.CreateUserWizard"
+             icon="icons/user/CreateUserAction.16x16.png"
+             id="org.nightlabs.jfire.base.admin.ui.user.CreateUserWizard"
+             name="%org.nightlabs.jfire.base.admin.ui.user.CreateUserWizard.name">
+       </wizard>
+       <wizard
+             category="org.nightlabs.jfire.base.admin.ui"
+             class="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupWizard"
+             icon="icons/usersecuritygroup/CreateUserGroupAction.16x16.png"
+             id="org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupWizard"
+             name="%org.nightlabs.jfire.base.admin.ui.usersecuritygroup.CreateUserGroupWizard.name">
+       </wizard>
+       <wizard
+             category="org.nightlabs.jfire.base.admin.ui"
+             class="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationWizard"
+             icon="icons/workstation/CreateWorkstationAction.16x16.png"
+             id="org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationWizard"
+             name="%org.nightlabs.jfire.base.admin.ui.workstation.CreateWorkstationWizard.name">
+       </wizard>
+       <wizard
+             category="org.nightlabs.jfire.base.admin.ui"
+             class="org.nightlabs.jfire.base.admin.ui.organisation.create.CreateOrganisationWizard"
+             icon="icons/organisation-16.gif"
+             id="org.nightlabs.jfire.base.admin.ui.organisation.create.CreateOrganisationWizard"
+             name="%org.nightlabs.jfire.base.admin.ui.organisation.create.CreateOrganisationWizard.name">
+       </wizard>
+    </extension>
+    <extension
+          point="org.nightlabs.base.ui.editor2perspective">
+       <registry
+             editorID="org.nightlabs.jfire.base.admin.ui.editor.workstation.WorkstationEditor"
+             perspectiveID="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective">
+       </registry>
+       <registry
+             editorID="org.nightlabs.jfire.base.admin.ui.editor.user.UserEditor"
+             perspectiveID="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective">
+       </registry>
+       <registry
+             editorID="org.nightlabs.jfire.base.admin.ui.editor.usersecuritygroup.UserSecurityGroupEditor"
+             perspectiveID="org.nightlabs.jfire.base.admin.ui.BaseAdminPerspective">
+       </registry>
+    </extension>
+</plugin>

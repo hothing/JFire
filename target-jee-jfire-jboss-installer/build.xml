@@ -1,0 +1,160 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+		<!-- FIXME -->
+		<property name="server-target" value="../target-jee-jfire-max-jboss/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+
+    <macrodef name="buildproject">
+    	<attribute name="srcdir"/>
+    	<attribute name="destdir"/>
+        <attribute name="classpathid" default="myemptyclasspath" />
+    	<attribute name="metainf" default="@{srcdir}/../META-INF"/>
+        <sequential>
+        	<echo>srcdir: @{srcdir}</echo>
+           	<echo>destdir: @{destdir}</echo>
+           	<echo>classpathid: @{classpathid}</echo>
+        	<path id="myemptyclasspath"></path>
+        	
+        	<mkdir dir="@{destdir}"/>
+    		<copy todir="@{destdir}">
+    			<fileset dir="@{srcdir}" excludes="**/*.java"/>
+    		</copy>
+        	<mkdir dir="@{destdir}/META-INF"/>
+    		<copy todir="@{destdir}/META-INF" failonerror="false">
+    			<fileset dir="@{metainf}" includes="**/*"/>
+    		</copy>
+    		<javac debug="true" classpathref="@{classpathid}" srcdir="@{srcdir}" destdir="@{destdir}"/>
+        </sequential>
+    </macrodef>
+	
+    <macrodef name="buildprojectjar">
+    	<attribute name="srcdir"/>
+    	<attribute name="destjar"/>
+        <attribute name="classpathid" default="myemptyclasspath" />
+    	<attribute name="tmpbuilddir" default="@{srcdir}/../.tmpbin"/>
+    	<attribute name="metainf" default="@{srcdir}/../META-INF"/>
+        <sequential>
+        	<echo>srcdir: @{srcdir}</echo>
+           	<echo>destjar: @{destjar}</echo>
+           	<echo>classpathid: @{classpathid}</echo>
+           	<echo>tmpbuilddir: @{tmpbuilddir}</echo>
+        	<buildproject srcdir="@{srcdir}" destdir="@{tmpbuilddir}" classpathid="@{classpathid}" metainf="@{metainf}"/>
+        	<!-- manifest="@{tmpbuilddir}/META-INF/MANIFEST.MF" -->
+        	<jar destfile="@{destjar}" manifest="@{tmpbuilddir}/META-INF/MANIFEST.MF">
+        		<fileset dir="@{tmpbuilddir}">
+        			<include name="**/*"/>
+        		</fileset>
+        	</jar>
+        	<delete dir="@{tmpbuilddir}"/>
+        </sequential>
+    </macrodef>
+
+	<target name="build" depends="init">
+		<property name="destdir" value="${target}"/>
+		<delete dir="${destdir}"/>
+		<mkdir dir="${destdir}"/>
+
+		<!-- ### build NightlabsInstaller ### -->
+		<mkdir dir="${destdir}/lib"/>
+    	<path id="nightlabs-installer-classpath">
+			<fileset dir="../NightLabsInstaller/lib">
+				<include name="*.jar"/>
+			</fileset>
+    	</path>
+		<buildprojectjar 
+			srcdir="../NightLabsInstaller/src" 
+			destjar="${destdir}/lib/NightLabsInstaller.jar" 
+			classpathid="nightlabs-installer-classpath"
+			metainf="src/META-INF-default"
+		/>
+
+		<!-- ### copy license and readme ### -->
+		<copy todir="${destdir}">
+			<fileset dir="../JFireInstaller">
+				<include name="LICENSE*"/>
+				<include name="README.txt"/>
+			</fileset>
+		</copy>
+		
+		<!-- ### copy NightlabsInstaller libs ### -->
+		<copy todir="${destdir}/lib">
+			<fileset dir="../NightLabsInstaller/lib">
+				<include name="*.jar"/>
+			</fileset>
+		</copy>
+		
+		<!-- ### build NightlabsInstallerExtensions ### -->
+    	<path id="nightlabs-installer-extensions-classpath">
+			<fileset dir="../NightLabsInstaller/lib">
+				<include name="*.jar"/>
+			</fileset>
+    		<fileset file="${destdir}/lib/NightLabsInstaller.jar"/>
+    	</path>
+		<buildprojectjar 
+			srcdir="../NightLabsInstallerExtensions/src" 
+			destjar="${destdir}/lib/NightLabsInstallerExtensions.jar" 
+			classpathid="nightlabs-installer-extensions-classpath"
+			metainf="src/META-INF-default"
+		/>
+
+		
+		<!-- ### build JFireInstaller ### -->
+		<mkdir dir="${destdir}/main"/>
+		<path id="jfire-installer-classpath">
+			<fileset file="${destdir}/lib/NightLabsInstaller.jar"/>
+			<fileset file="${destdir}/lib/NightLabsInstallerExtensions.jar"/>
+			<dirset dir="..">
+				<include name="org.nightlabs.base/bin"/>
+				<include name="org.nightlabs.config/bin"/>
+				<include name="org.nightlabs.concurrent/bin"/>
+				<include name="org.nightlabs.jfire.base/bin"/>
+				<include name="JFireBaseBean/bin"/>
+				<include name="JFireServerManager/bin"/>
+				<include name="JFireIntegrationJBoss/bin"/>
+			</dirset>
+			<fileset dir="lib">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<buildprojectjar 
+			srcdir="../JFireInstaller/src" 
+			destjar="${destdir}/main/main.jar" 
+			classpathid="jfire-installer-classpath"
+			metainf="../JFireInstaller/JFireInstaller/META-INF"
+		/>
+
+		<!-- ### build one-jar ### -->
+		<buildproject 
+			srcdir="../JFireInstaller/src-boot" 
+			destdir="${destdir}"
+			metainf="../JFireInstaller/META-INF-boot"
+		/> 
+		
+		<!-- ### copy original target jboss ### -->
+		<mkdir dir="${destdir}/jboss"/>
+		<copy todir="${destdir}/jboss">
+			<fileset dir="${server-target}" includes="**/*"/>
+		</copy>
+		
+		<!-- ### copy jboss native win ### -->
+		<mkdir dir="${destdir}/jboss-native-win"/>
+		<copy todir="${destdir}/jboss-native-win">
+			<fileset dir="../JFireInstaller/JFireInstaller/jboss-native-win" includes="**/*"/>
+		</copy>
+		
+		
+		<!-- REMOVE ME: -->
+		<mkdir dir="jar"/>
+		<jar destfile="jar/installer.jar" manifest="${destdir}/META-INF/MANIFEST.MF">
+			<fileset dir="${destdir}" includes="**/*"/>
+		</jar>
+	</target>
+</project>

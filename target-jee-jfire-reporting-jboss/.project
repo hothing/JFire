@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-reporting-jboss</name>
+	<comment></comment>
+	<projects>
+		<project>target-jee-itext-jboss</project>
+		<project>target-jee-jfire-jboss-birt</project>
+		<project>target-jee-jfire-jboss-jbpm</project>
+		<project>target-jee-jfire-min-jboss</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

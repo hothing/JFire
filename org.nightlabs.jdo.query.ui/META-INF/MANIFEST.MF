@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JDO Plugin
+Bundle-SymbolicName: org.nightlabs.jdo.query.ui;singleton:=true
+Bundle-Version: 1.0.1.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.nightlabs.jdo.query.ui.JdoPlugin
+Bundle-Vendor: NightLabs.org
+Bundle-Localization: plugin
+Export-Package: org.nightlabs.jdo.query.ui;uses:="org.eclipse.ui.plugin,org.osgi.framework",
+ org.nightlabs.jdo.query.ui.search
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.nightlabs.base.ui,
+ org.nightlabs.jfire.base.j2ee
+Eclipse-LazyStart: true

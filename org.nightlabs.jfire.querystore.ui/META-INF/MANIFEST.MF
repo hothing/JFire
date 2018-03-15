@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QuerystorePlugin
+Bundle-SymbolicName: org.nightlabs.jfire.querystore.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.nightlabs.jfire.querystore.ui.QuerystorePlugin
+Bundle-Vendor: NightLabs
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.nightlabs.jfire.base.ui;bundle-version="0.9.7"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true
+Export-Package: org.nightlabs.jfire.querystore.ui,
+ org.nightlabs.jfire.querystore.ui.overview

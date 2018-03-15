@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-jee-jfire-jboss-sar</name>
+	<comment></comment>
+	<projects>
+		<project>JFireServerDataDirectoryJBoss</project>
+		<project>UnifiedEjbJndiJBoss</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

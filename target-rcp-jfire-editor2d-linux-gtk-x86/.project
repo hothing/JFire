@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-rcp-jfire-editor2d-linux-gtk-x86</name>
+	<comment></comment>
+	<projects>
+		<project>target-rcp-batik</project>
+		<project>target-rcp-itext</project>
+		<project>target-rcp-jfire-editor2d-various</project>
+		<project>target-rcp-jfire-min-linux-gtk-x86</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

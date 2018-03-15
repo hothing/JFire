@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>JFireDemoWebShop</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>ProductListingServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.producttype.ProductTypeListingServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProductListingServlet</servlet-name>
+		<url-pattern>/product/list/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SimpleProductDetailServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.producttype.SimpleProductTypeDetailServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SimpleProductDetailServlet</servlet-name>
+		<url-pattern>/simpleproduct/details/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>VoucherDetailServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.producttype.VoucherTypeDetailServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VoucherDetailServlet</servlet-name>
+		<url-pattern>/voucher/details/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductPropertyServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.producttype.ProductPropertyServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProductPropertyServlet</servlet-name>
+		<url-pattern>/product/property/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductImagePropertyServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.producttype.ProductImagePropertyServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ProductImagePropertyServlet</servlet-name>
+		<url-pattern>/product/imageproperty/*</url-pattern>
+	</servlet-mapping>
+
+	
+	
+	<servlet>
+		<servlet-name>ShoppingCartServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.shoppingcart.ShoppingCartServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ShoppingCartServlet</servlet-name>
+		<url-pattern>/shoppingcart/*</url-pattern>
+	</servlet-mapping>
+
+
+	
+	<servlet>
+		<servlet-name>CustomerServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.customer.CustomerServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustomerServlet</servlet-name>
+		<url-pattern>/customer/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	<!-- 
+
+	<servlet>
+		<servlet-name>CustomerRegisterServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.customer.CustomerRegisterServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustomerRegisterServlet</servlet-name>
+		<url-pattern>/customer/register/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CustomerLoginServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.customer.CustomerLoginServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CustomerLoginServlet</servlet-name>
+		<url-pattern>/customer/auth/login/*</url-pattern>
+	</servlet-mapping>
+	-->
+	
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>org.nightlabs.jfire.web.demoshop.order.OrderServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/order/*</url-pattern>
+	</servlet-mapping>
+	
+</web-app>	

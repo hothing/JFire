@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Clientui Plug-in
+Bundle-SymbolicName: org.nightlabs.clientui.ui
+Bundle-Version: 1.0.1.qualifier
+Bundle-Activator: org.nightlabs.clientui.ui.ClientUIPlugin
+Bundle-Vendor: NightLabs.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.nightlabs.base.ui,
+ org.nightlabs.jfire.base.j2ee,
+ org.nightlabs.eclipse.ui.dialog;bundle-version="1.1.5"
+Eclipse-LazyStart: true
+Export-Package: org.nightlabs.clientui.ui,
+ org.nightlabs.clientui.ui.layout

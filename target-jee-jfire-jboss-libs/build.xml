@@ -1,0 +1,66 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- ### jboss/bin ### -->
+		<mkdir dir="${target}/bin"/>
+		<copy overwrite="true" todir="${target}/bin">
+			<fileset dir="src/jboss-bin">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<!-- chmod +x *.sh scripts -->
+		<path id="scriptspath">
+			<fileset dir="${target}/bin" includes="*.sh"/>
+		</path>
+		<pathconvert property="scripts" refid="scriptspath" pathsep=" "/>
+		<exec executable="chmod" failifexecutionfails="false" failonerror="false">
+			<arg value="+x"/>
+			<arg line="${scripts}"/>
+		</exec>
+
+		<!-- ### jboss/server/default ### -->
+		<mkdir dir="${target}/server/default"/>
+		<copy overwrite="true" todir="${target}/server/default">
+			<fileset dir="src/jboss-server">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<!-- ### derby ### -->
+		<mkdir dir="${target}/server/default/lib"/>
+		<!-- Because of crappy windows (exclusively locked file) we can't directly extract it into the target. We must use a temporary file. -->
+		<delete failonerror="false" dir="tmp-derby"/>
+		<mkdir dir="tmp-derby"/>
+		<unzip src="src/derby/db-derby-10.4.2.0-lib.zip" dest="tmp-derby/">
+			<mapper type="flatten"/>
+			<patternset>
+				<include name="db-derby-10.4.2.0-lib/lib/derby.jar"/>
+				<include name="db-derby-10.4.2.0-lib/lib/derbyclient.jar"/>
+			</patternset>
+		</unzip>
+		<!-- WORKAROUND: replace the modules.properties file in the jar: -->
+		<jar destfile="tmp-derby/derby.jar"	
+			update="true" 
+			basedir="src/derby/workaround-10.4.2.0" 
+			includes="**/*"/>
+
+		<!-- move to target and only log a warning, if it fails (likely in Windows because Eclipse keeps the file open for an unknown reason) -->
+		<move failonerror="false" todir="${target}/server/default/lib" >
+			<fileset dir="tmp-derby" includes="**/*"/>
+		</move>
+		<delete dir="tmp-derby"/>
+
+		<!-- ### datanucleus ### -->
+		<copy overwrite="true" file="src/datanucleus/datanucleus-jca-1.1.3.rar" tofile="${target}/server/default/deploy/datanucleus-jca.rar"/>
+	</target>
+</project>

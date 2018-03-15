@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<project name="project" default="dist.bin.post">
+	<!--
+	<target name="init">
+		<property file="build-nightlabs-path.properties"/>
+	</target>
+	-->
+	
+	<target name="dist.bin.post"> <!-- depends="init"> -->
+    	<property name="jfire.jboss.dir" value="${j2ee.deploy.dir}/../../.." />
+    	<property name="installer.dir" value="dist/installer"/>
+
+		<delete dir="${installer.dir}"/>
+
+		<mkdir dir="${installer.dir}/main"/>
+		<mkdir dir="${installer.dir}/main/tmp"/>
+
+		<copy todir="${installer.dir}/lib">
+			<fileset dir="../NightLabsInstaller/dist">
+				<include name="NightLabsInstaller.jar"/>
+			</fileset>
+			<fileset dir="../NightLabsInstaller/lib">
+				<include name="commons-cli-1.0.jar"/>
+			</fileset>    		
+			<fileset dir="../NightLabsInstallerExtensions/dist">
+				<include name="NightLabsInstallerExtensions.jar"/>
+			</fileset>    		
+	   	</copy>			   	
+
+	  	<copy todir="${installer.dir}/main/tmp" overwrite="true">
+	   		<fileset dir="bin">
+			    <include name="**/*"/>
+			</fileset>
+			<fileset dir="JFireInstaller">
+				<include name="META-INF/**"/>
+			</fileset>
+		</copy>
+
+		<jar destfile="${installer.dir}/main/main.jar" manifest="JFireInstaller/META-INF/MANIFEST.MF">
+			<fileset dir="${installer.dir}/main/tmp">
+	   			<include name="**/*"/>
+			</fileset>
+		</jar>
+
+		<delete dir="${installer.dir}/main/tmp"/>
+
+		<copy todir="${installer.dir}" overwrite="true">
+	   		<fileset dir="bin-boot">
+			    <include name="**/*"/>
+			</fileset>
+			<fileset dir=".">
+			    <include name="README.*"/>
+			    <include name="LICENSE.*"/>
+			</fileset>
+		</copy>
+		<mkdir dir="${installer.dir}/META-INF" />
+		<copy todir="${installer.dir}/META-INF" overwrite="true">
+	   		<fileset dir="META-INF-boot">
+			    <include name="**/*"/>
+			</fileset>
+		</copy>
+
+		<mkdir dir="${installer.dir}/jboss"/>
+	   	<copy todir="${installer.dir}/jboss">
+	   		<fileset dir="${jfire.jboss.dir}">
+	   			<include name="**/*"/>
+	   		</fileset>
+	   	</copy>
+
+		<copy todir="${installer.dir}">
+			<fileset dir="JFireInstaller">
+				<include name="jboss-native*/**"/>
+			</fileset>
+		</copy>
+
+	   	<jar destfile="dist/jfire-jboss-installer.jar" manifest="META-INF-boot/MANIFEST.MF">
+	   		<fileset dir="${installer.dir}">
+	   			<include name="**/*"/>
+			</fileset>
+	   	</jar>
+
+		<delete dir="${installer.dir}"/>
+
+	</target>
+
+</project>

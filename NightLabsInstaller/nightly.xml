@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nightlybuild PUBLIC "-//NightLabs//DTD NightlyBuild V 0.10//EN" "http://www.nightlabs.de/dtd/nightlybuild_0_10.dtd">
+<nightlybuild>
+  <project name="NightLabsInstaller" exclude-from-ide-setup="true">
+    <ant path="NightLabsInstaller" file="build-nightlabs.xml" target="dist" />
+    <provides />
+    <requires />
+    <publishes location="NightLabsInstaller/dist/NightLabsInstaller.jar" />
+    <javadoc path="NightLabsInstaller/src" />
+    <provides path="WORKSPACE/NightLabsInstaller/dist/NightLabsInstaller.jar" location="NightLabsInstaller/dist/NightLabsInstaller.jar" />
+  </project>
+</nightlybuild>

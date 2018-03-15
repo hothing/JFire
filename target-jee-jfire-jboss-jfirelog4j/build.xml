@@ -1,0 +1,32 @@
+<project default="build">
+	
+	<target name="init">
+		<!-- set the dafault target dir (applies only if property is not already set) -->
+		<property name="target" value="${basedir}/target"/>
+	</target>
+	
+	<target name="clean">
+		<!-- delete the *local* target dir - not the ${target} dir -->
+		<delete dir="target"/>
+	</target>
+	
+	<target name="build" depends="init">
+		<!-- ### jfirelog4j ### -->
+		<mkdir dir="${target}/server/default/lib"/>
+		<mkdir dir="../JFireLog4j/bin"/>
+		<javac
+			classpath="lib/log4j-1.2.14.jar"
+			srcdir="../JFireLog4j/src"
+			destdir="../JFireLog4j/bin"
+			debug="true"
+		/>
+		<!-- Do not add stuff like this to the target project build files. The "build" target is for building
+		     and not for knowing anything of its environment.
+		     When the tooling is finished, I will remove the following line.
+		     Marc. -->
+		<delete failonerror="false" file="${target}/server/default/lib/JFireLog4j.jar"/>
+		<zip destfile="${target}/server/default/lib/JFireLog4j.jar">
+			<fileset dir="../JFireLog4j/bin" includes="**/*"/>
+		</zip>
+	</target>
+</project>

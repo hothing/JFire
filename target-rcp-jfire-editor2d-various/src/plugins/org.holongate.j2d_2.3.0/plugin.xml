@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="org.holongate.j2d"
+   name="%plugin.name"
+   version="2.3.0"
+   provider-name="Holongate.org"
+   class="org.holongate.j2d.J2DPlugin">
+
+   <runtime>
+      <library name="j2d4swt.jar">
+         <export name="*"/>
+         <packages prefixes="org.holongate.j2d"/>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.swt" export="true"/>
+   </requires>
+
+
+   <extension-point id="factories" name="Java2D for SWT Graphics2D Factories" schema="schema/factories.exsd"/>
+
+   <extension
+         name="Java2D Preferences"
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="%prefs.welcome.name"
+            class="org.holongate.j2d.WelcomePreferencePage"
+            id="org.holongate.j2d.prefs">
+      </page>
+      <page
+            name="%prefs.performance.name"
+            category="org.holongate.j2d.prefs"
+            class="org.holongate.j2d.PerformancePreferencePage"
+            id="org.holongate.j2d.prefs.performance">
+      </page>
+      <page
+            name="%prefs.rendering.name"
+            category="org.holongate.j2d.prefs"
+            class="org.holongate.j2d.RenderingPreferencePage"
+            id="org.holongate.j2d.prefs.hints">
+      </page>
+   </extension>
+   <extension
+         name="Core Graphics2D Factories"
+         point="org.holongate.j2d.factories">
+      <factory
+            platform="all"
+            name="%all.factory"
+            class="org.holongate.j2d.SWTGraphics2DFactory">
+      </factory>
+   </extension>
+
+</plugin>

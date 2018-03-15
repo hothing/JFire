@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project name="project" default="deploy">
+	<target name="deploy">
+		<copy file="dist/jfire-jboss-installer.jar" todir="${j2ee.deploy.dir}/../../../.." />
+	</target>
+</project>

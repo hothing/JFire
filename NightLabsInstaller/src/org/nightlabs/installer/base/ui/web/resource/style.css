@@ -1,0 +1,94 @@
+body,table,td,a,p {font-family:arial,sans-serif;}
+body {
+	padding: 20px;
+}
+input, .input {
+  border: 1px solid #999999;
+}
+/*
+.wide {
+  width: 200px;
+}
+.extrawide {
+  width: 350px;
+}
+.name {
+  padding-right: 10px;
+}
+.value {
+  padding-right: 10px;
+}
+.annotation {
+  font-style: italic;
+  font-size: 10px;
+  color: #808080;
+}
+.description {
+  font-style: italic;
+  font-size: 11px;
+}
+*/
+.installertail {
+	margin-top: 32px;
+	border-top: 1px solid #dddddd; 
+	border-bottom: 1px solid #dddddd;
+	color: #999999;
+	height: 32px;
+}
+
+.installertail a {
+	color: #999999;
+}
+
+.element {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	position: relative;
+}
+/*
+.text {
+	margin-bottom: 10px;
+}
+.textinput {
+	margin-bottom: 10px;
+}
+.switchinput {
+	margin-bottom: 10px;
+}
+*/
+
+.textelement {
+	margin-bottom: 32px;
+}
+
+.textinput {
+	position: absolute;
+	left: 200px;
+	width: 350px;	
+}
+
+.switchradiogroup {
+	margin-left: 16px;
+}
+
+#buttonbar {
+	margin-top: 32px;
+}
+
+#installerhead {
+	position: relative; 
+	border-top: 1px solid #dddddd; 
+	border-bottom: 1px solid #dddddd; 
+	margin-bottom: 30px;
+	height: 72px;
+}
+
+#installericon {
+	position: absolute;
+	right: 0px;
+}
+
+#installertitle {
+	font-weight: bold;
+	vertical-align: middle;
+}

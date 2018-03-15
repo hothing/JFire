@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>target-rcp-jfire-editor2d-various-win32</name>
+	<comment></comment>
+	<projects>
+		<project>target-rcp-jfire-editor2d-various</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

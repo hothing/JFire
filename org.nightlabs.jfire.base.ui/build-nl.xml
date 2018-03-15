@@ -1,0 +1,6 @@
+<project default="build">
+	<target name="build">
+		<copy file="../JFireBaseClientLib/src/org/nightlabs/jfire/base/login/JFireSecurityConfiguration.java" todir="src/org/nightlabs/jfire/base/login" failonerror="true" verbose="true" /> 
+		<copy file="../JFireBaseClientLib/src/org/nightlabs/jfire/base/login/JFireSecurityConfigurationEntry.java" todir="src/org/nightlabs/jfire/base/login" failonerror="true" verbose="true" />
+	</target>
+</project>
